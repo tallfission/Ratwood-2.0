@@ -399,6 +399,16 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	converted_type = /area/rogue/outdoors/dungeon1
 	ceiling_protected = TRUE
 
+/area/rogue/under/cave/inferno
+	name = "inferno"
+	icon_state = "fire_chamber"
+	first_time_text = "Somewhere Else..."
+	droning_sound = 'sound/music/area/inferno.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	converted_type = /area/rogue/outdoors/dungeon1
+	ceiling_protected = TRUE
+
 /area/rogue/outdoors/dungeon1
 	name = "smalldungeonoutdoors"
 	icon_state = "spidercave"
