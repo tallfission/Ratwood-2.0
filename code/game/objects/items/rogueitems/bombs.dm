@@ -341,7 +341,6 @@
 	icon_state = "satchel_bomb"
 	var/lit_state = "satchel_bomb-lit"
 	icon = 'icons/roguetown/items/misc.dmi'
-	icon = 'icons/roguetown/items/misc.dmi'
 	w_class = WEIGHT_CLASS_BULKY
 	throwforce = 0
 	throw_range = 2

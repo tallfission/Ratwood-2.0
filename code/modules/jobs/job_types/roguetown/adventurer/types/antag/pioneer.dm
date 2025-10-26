@@ -75,11 +75,11 @@
 
 /obj/effect/proc_holder/spell/targeted/pioneer/plant_bogtrap_delayed
 	name = "Set Bogtrap (Delayed)"
-	desc = "After 60 seconds, a bogtrap arms beneath your feet."
+	desc = "After 30 seconds, a bogtrap arms beneath your feet."
 	range = 0
 	overlay_state = "trap"
 	releasedrain = 0
-	recharge_time = 90 SECONDS
+	recharge_time = 50 SECONDS //this bascically means how long AFTER you place a bomb, you can place another one. Has nothing to do with the placing timer
 	max_targets = 0
 	cast_without_targets = TRUE
 	antimagic_allowed = TRUE
@@ -89,7 +89,7 @@
 	miracle = FALSE
 	req_items = list(/obj/item/rogueweapon/shovel/)
 
-	var/setup_delay = 30 SECONDS
+	var/setup_delay = 20 SECONDS
 	var/pending = FALSE
 	var/trap_path = /obj/structure/trap/bogtrap/bomb
 
