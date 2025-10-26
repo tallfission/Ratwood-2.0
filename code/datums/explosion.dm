@@ -215,11 +215,8 @@ GLOBAL_LIST_EMPTY(explosions)
 		if(dist > EXPLODE_NONE)
 			T.explosion_level = max(T.explosion_level, dist) //let the bigger one have it
 			T.explosion_id = id
-			if(istype(T, /turf/closed/wall))
-				var/turf/closed/wall/W = T
-				W.ex_act(dist, epicenter, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
-			else
-				T.ex_act(dist)
+			T.ex_act(dist)
+			exploded_this_tick += T
 
 		//--- THROW STUFF AROUND ---
 
