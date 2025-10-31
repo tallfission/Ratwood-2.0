@@ -28,7 +28,7 @@
 	armor = ARMOR_BOOTS_BAD
 
 /obj/item/clothing/shoes/roguetown/boots/attackby(obj/item/W, mob/living/carbon/user, params)
-	if(istype(W, /obj/item/rogueweapon/huntingknife/throwingknife))
+	if(istype(W, /obj/item/rogueweapon/huntingknife))
 		if(holdingknife == null)
 			for(var/obj/item/clothing/shoes/roguetown/boots/B in user.get_equipped_items(TRUE))
 				to_chat(loc, span_warning("I quickly slot [W] into [B]!"))
@@ -36,7 +36,7 @@
 				holdingknife = W
 				playsound(loc, 'sound/foley/equip/swordsmall1.ogg')
 		else
-			to_chat(loc, span_warning("My boot already holds a throwing knife."))
+			to_chat(loc, span_warning("My boot already holds a knife."))
 		return
 	. = ..()
 
