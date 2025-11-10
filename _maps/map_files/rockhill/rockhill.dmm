@@ -39031,11 +39031,10 @@
 /turf/open/floor/rogue/metal/barograte,
 /area/rogue/under/cavewet/wizarddungeon)
 "mtd" = (
-/obj/structure/mineral_door/wood/donjon{
-	dir = 4;
+/obj/structure/mineral_door/wood/violet{
 	locked = 1;
-	lockid = "church";
-	name = "Church under-entrance"
+	lockid = "keeper";
+	name = "Pestra's Sanctum"
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/church/basement)
