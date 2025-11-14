@@ -233,10 +233,10 @@
 	cost = 50
 	contains = list(/obj/item/rogueweapon/greataxe/steel/doublehead)
 
-/datum/supply_pack/rogue/Knight/grandmaul
-	name = "Grand Maul"
-	cost = 80
-	contains = list(/obj/item/rogueweapon/mace/maul/grand)
+/datum/supply_pack/rogue/Knight/grandmace
+	name = "Grand Mace"
+	cost = 60
+	contains = list(/obj/item/rogueweapon/mace/goden/steel)
 
 /datum/supply_pack/rogue/Knight/silvermace
 	name = "Silver-plated mace"
