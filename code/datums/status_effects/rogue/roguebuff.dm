@@ -511,6 +511,16 @@
 	examine_text = null
 	duration = 10 SECONDS
 
+/datum/status_effect/buff/healing/prayer
+	id = "healing_prayers"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/healing/prayer
+	duration = 12 SECONDS
+
+/atom/movable/screen/alert/status_effect/buff/healing/prayer
+	name = "Conviction"
+	desc = "By faith alone, I will mend."
+	icon_state = "buff"
+
 #define BLOODHEAL_DUR_SCALE_PER_LEVEL 3 SECONDS
 #define BLOODHEAL_RESTORE_DEFAULT 5
 #define BLOODHEAL_RESTORE_SCALE_PER_LEVEL 2
