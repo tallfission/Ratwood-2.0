@@ -21,7 +21,7 @@
 							/obj/structure/flora/roguegrass/herb/random = 7,
 							/obj/structure/flora/roguegrass/bush/westleach = 7,
 							/obj/structure/flora/roguegrass/maneater = 13,
-							/obj/structure/flora/roguegrass/pyroclasticflowers = 3,
+							/obj/structure/flora/roguegrass/pyroclasticflowers = 10,
 							/obj/item/natural/stone = 23,
 							/obj/item/natural/rock = 6,
 							/obj/item/grown/log/tree/stick = 16,
@@ -54,4 +54,5 @@
 							/obj/item/natural/stone = 6,
 							/obj/item/natural/rock = 1,
 							/obj/item/grown/log/tree/stick = 3,
-							/obj/structure/flora/roguetree/stump/log = 3)
+							/obj/structure/flora/roguetree/stump/log = 3,
+							/obj/structure/flora/roguegrass/pyroclasticflowers = 5,)
