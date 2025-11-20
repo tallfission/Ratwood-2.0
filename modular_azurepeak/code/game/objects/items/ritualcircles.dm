@@ -1914,7 +1914,7 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 				if(do_after(user, 50))
 					user.say("Claim this body, shape it to your will!")
 					if(do_after(user, 50))
-						user.say("Let him burn for thee alone!")
+						user.say("Let them burn for thee alone!")
 						if(do_after(user, 50))
 							icon_state = "baotha_active" 
 							baothablessing(target)
