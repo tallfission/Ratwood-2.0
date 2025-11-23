@@ -260,96 +260,87 @@
 	var/trigger_text_other = ""
 	var/effect_text_self = ""
 	var/effect_text_other = ""
-	var/random_flavor = rand(0,4)
+	var/list/choices_self = list()
+	var/list/choices_other = list()
 	switch(flavor)
 		if("divine")
-			var/list/choices_self = list(
+			choices_self = list(
 				"A divine glow surrounds you briefly",
 				"A warm light envelops you momentarily",
 				"You feel touched by a higher power",
 				"A serene calm washes over you",
 				"You sense a benevolent presence nearby"
 			)
-			var/list/choices_other = list(
+			choices_other = list(
 				"A divine glow surrounds [owner] briefly",
 				"A warm light envelops [owner] momentarily",
 				"[owner] looks touched by a higher power",
 				"A serene calm washes over [owner]",
 				"[owner] seems to sense a benevolent presence nearby"
 			)
-			flavor_text_self = choices_self[random_flavor]
-			flavor_text_other = choices_other[random_flavor]
 		if("demonic")
-			var/list/choices_self = list(
+			choices_self = list(
 				"A dark shadow looms over you briefly",
 				"A chilling presence envelops you momentarily",
 				"You feel tainted by a malevolent force",
 				"A sinister chill runs down your spine",
 				"You sense an ominous presence nearby"
 			)
-			var/list/choices_other = list(
+			choices_other = list(
 				"A dark shadow looms over [owner] briefly",
 				"A chilling presence envelops [owner] momentarily",
 				"[owner] looks tainted by a malevolent force",
 				"A sinister chill runs down [owner]'s spine",
 				"[owner] seems to sense an ominous presence nearby"
 			)
-			flavor_text_self = choices_self[random_flavor]
-			flavor_text_other = choices_other[random_flavor]
-
 		if("witchcraft")
-			var/list/choices_self = list(
+			choices_self = list(
 				"You feel the stirrings of ancient magic within you",
 				"A mystical energy courses through your veins",
 				"You sense the presence of old spells around you",
 				"A faint magical aura surrounds you briefly",
 				"You feel connected to the arcane forces"
 			)
-			var/list/choices_other = list(
+			choices_other = list(
 				"[owner] seems to be surrounded by a mystical energy",
 				"A faint magical aura surrounds [owner] briefly",
 				"[owner] looks touched by ancient magic",
 				"You sense the presence of old spells around [owner]",
 				"[owner] appears connected to arcane forces"
 			)
-			flavor_text_self = choices_self[random_flavor]
-			flavor_text_other = choices_other[random_flavor]
 		if("fey")
-			var/list/choices_self = list(
+			choices_self = list(
 				"You feel the playful touch of the fey",
 				"A whimsical energy surrounds you briefly",
 				"You sense the mischievous presence of fae beings",
 				"A light, airy feeling washes over you",
 				"You feel connected to the enchanting forces of nature"
 			)
-			var/list/choices_other = list(
+			choices_other = list(
 				"[owner] seems to be surrounded by a whimsical energy",
 				"A light, airy feeling washes over [owner]",
 				"[owner] looks touched by the playful fey",
 				"You sense the mischievous presence of fae beings around [owner]",
 				"[owner] appears connected to the enchanting forces of nature"
 			)
-			flavor_text_self = choices_self[random_flavor]
-			flavor_text_other = choices_other[random_flavor]
+			
 		if("mutation")
-			var/list/choices_self = list(
+			choices_self = list(
 				"You feel a strange transformation overtaking you",
 				"A bizarre energy courses through your body",
 				"You sense an unusual change happening within you",
 				"A peculiar sensation spreads through your limbs",
 				"You feel connected to chaotic forces of mutation"
 			)
-			var/list/choices_other = list(
+			choices_other = list(
 				"[owner] seems to be undergoing a strange transformation",
 				"A bizarre energy courses through [owner]'s body",
 				"[owner] looks like they're changing in an unusual way",
 				"A peculiar sensation spreads through [owner]'s limbs",
 				"[owner] appears connected to chaotic forces of mutation"
 			)
-			flavor_text_self = choices_self[random_flavor]
-			flavor_text_other = choices_other[random_flavor]
-
-
+	flavor_text_self = pick(choices_self)
+	flavor_text_other = pick(choices_other)
 
 	switch(trigger)
 		if("on death")
