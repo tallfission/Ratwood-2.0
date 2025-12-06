@@ -150,6 +150,11 @@
 	cost = 60
 	contains = list(/obj/item/rogueweapon/greatsword/grenz)
 
+/datum/supply_pack/rogue/Sellsword/SFlamberge
+	name = "Steel Flamberge"
+	cost = 60
+	contains = list(/obj/item/rogueweapon/greatsword/grenz/flamberge)
+
 //////////////////////
 // RANESHEN - RIDER //
 //////////////////////
@@ -189,12 +194,12 @@
 ///////////////////////
 
 /datum/supply_pack/rogue/Sellsword/wolfhelm
-	name = "Forlon Volf Plate Helm"
+	name = "Forlorn Volf Plate Helm"
 	cost = 30
 	contains = list(/obj/item/clothing/head/roguetown/helmet/heavy/volfplate)
 
 /datum/supply_pack/rogue/Sellsword/forloncollar
-	name = "Forlon Collar"
+	name = "Forlorn Collar"
 	cost = 20
 	contains = list(/obj/item/clothing/neck/roguetown/gorget/forlorncollar)
 

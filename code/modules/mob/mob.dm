@@ -483,17 +483,30 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(isliving(src) && src.m_intent != MOVE_INTENT_SNEAK && src.stat != DEAD)
 		var/message = "[src] looks at"
 		var/target = "\the [A]"
+		var/zone_text = parse_zone(zone_selected)
+		var/mob/living/T = A
 		if(!isturf(A))
 			if(A == src)
 				message = "[src] looks over"
 				target = "themselves"
+			else if (isliving(A) && iscarbon(T) && T != src && zone_selected == BODY_ZONE_PRECISE_GROIN && abs(src.loc.x - T.loc.x) <= 1 && abs(src.loc.y - T.loc.y) <= 1)
+				var/atom/front_turf = get_step(T, T.dir)
+				var/atom/behind_turf = get_step(T, turn(T.dir, 180))
+				var/atom/side_left = get_step(T, turn(T.dir, 90))
+				var/atom/side_right = get_step(T, turn(T.dir, 270))
+				if(behind_turf && src.loc && behind_turf.z == src.loc.z && abs(behind_turf.x - src.loc.x) <= 1 && abs(behind_turf.y - src.loc.y) == 0)
+					zone_text = "ass"
+				else if((side_left && src.loc && side_left.z == src.loc.z && abs(side_left.x - src.loc.x) == 0 && abs(side_left.y - src.loc.y) == 0) || (side_right && src.loc && side_right.z == src.loc.z && abs(side_right.x - src.loc.x) == 0 && abs(side_right.y - src.loc.y) == 0))
+					zone_text = "hips"
+				else if(front_turf && src.loc && front_turf.z == src.loc.z && abs(front_turf.x - src.loc.x) <= 1 && abs(front_turf.y - src.loc.y) == 0)
+					zone_text = "crotch"
+				target = "[T]'s [zone_text]"
 			else if(A.loc == src)
 				target = "[src.p_their()] [A.name]"
 			else if(A.loc.loc == src)
 				message = "[src] looks into"
 				target = "[src.p_their()] [A.loc.name]"
 			else if(isliving(A) && src.cmode)
-				var/mob/living/T = A
 				if(!iscarbon(T))
 					target = "\the [T.name]'s [T.simple_limb_hit(zone_selected)]"
 				if(iscarbon(T) && T != src)
@@ -796,8 +809,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/Stat()
 	..()
 	// && check_rights(R_ADMIN,0)
-	var/ticker_time = world.time - SSticker.round_start_time
-	var/time_left = SSgamemode.round_ends_at - ticker_time
+	var/time_left = SSgamemode.round_ends_at - world.time
 	var/days = "TWILIGHT"
 	switch(GLOB.dayspassed)
 		if(1)
@@ -817,24 +829,23 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 	if(client)
 		if(statpanel("RoundInfo"))
-			stat("ROUND ID: [GLOB.rogue_round_id]")
-			stat("ROUND TIME: [time2text(STATION_TIME_PASSED(), "hh:mm:ss", 0)] [world.time - SSticker.round_start_time]")
-			if(SSgamemode.roundvoteend)
-				stat("ROUND END: [DisplayTimeText(time_left)]")
-			stat("DAY OF WEEK: [days]" )
-			if(client?.holder)
-				stat("Round TrueTime: [worldtime2text()] [world.time]")
-			stat("Map: [SSmapping.config?.map_name || "Loading..."]")
+			stat(null, "MAP: [SSmapping.config?.map_name || "Loading..."]")
 			var/datum/map_config/cached = SSmapping.next_map_config
 			if(cached)
-				stat("Next Map: [cached.map_name]")
-			stat("Time of Day: [GLOB.tod]")
+				stat(null, "Next Map: [cached.map_name]")
+			stat(null, "ROUND ID: [GLOB.rogue_round_id ? GLOB.rogue_round_id : "NULL"]")
+			stat(null, "ROUND TIME: [time2text(STATION_TIME_PASSED(), "hh:mm:ss", 0)] [world.time - SSticker.round_start_time]")
+			if(SSgamemode.roundvoteend)
+				stat("ROUND END: [DisplayTimeText(time_left)]")
 			if(client?.holder)
-				stat("Real Time: [station_time_timestamp()] [station_time()]")
-			stat("Ping: [round(client?.lastping, 1)]ms (Average: [round(client?.avgping, 1)]ms)")
-			stat("Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG: ([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
-			if(client?.holder)
-				stat(null, "Player count: [GLOB.clients.len]")
+				stat(null, "ROUND TrueTime: [worldtime2text()] [world.time]")
+			stat(null, "TIMEOFDAY: [days] ᛉ [uppertext(GLOB.tod)] ᛉ [station_time_timestamp("hh:mm")]")
+			stat(null, "IC Time: [station_time_timestamp()] [station_time()]")
+			stat(null, "PING: [round(client.lastping, 1)]ms (Average: [round(client.avgping, 1)]ms)")
+			stat(null, "TIME DILATION: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
+			if(check_rights(R_ADMIN,0))
+				stat(null, SSmigrants.get_status_line())
+				stat(null, "Player count: [GLOB.clients.len]") // If someone deletes this again I will slap your balls
 
 	if(client && client.holder && check_rights(R_DEBUG,0))
 		if(statpanel("MC"))

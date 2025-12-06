@@ -323,6 +323,7 @@
 		owner.remove_status_effect(src)
 
 /datum/sex_controller/proc/ejaculate()
+	SEND_SIGNAL(user, COMSIG_MOB_EJACULATED)
 	log_combat(user, user, "Ejaculated")
 	user.visible_message(span_love("[user] makes a mess!"))
 	playsound(user, 'sound/misc/mat/endout.ogg', 50, TRUE, ignore_walls = FALSE)
@@ -338,7 +339,7 @@
 	user.emote("sexmoanhvy", forced = TRUE)
 	user.playsound_local(user, 'sound/misc/mat/end.ogg', 100)
 	last_ejaculation_time = world.time
-	GLOB.azure_round_stats[STATS_PLEASURES]++
+	record_round_statistic(STATS_PLEASURES)
 
 /datum/sex_controller/proc/after_intimate_climax()
 	if(user == target)
