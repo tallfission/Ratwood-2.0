@@ -81,7 +81,6 @@
 		"mercenaries": "privateers",
 		"idiot": "swab",
 		"moron": "bilge rat",
-		"cunt": "landlubber",
 		"heretic": ["scurvy dog", "rapscallion", "picaroon", "bilge rat", "scallywag", "swab", "landlubber", "scoundrel", "son of a biscuit eater", "cur"],
 		"heretics": ["scurvy dogs", "rapscallions", "picaroons", "bilge rats", "scallywags", "swabs", "landlubbers", "scoundrels", "son of a biscuit eaters", "curs"],
 		"bandit": ["corsair", "buccaneer", "freebooter"],
