@@ -2779,7 +2779,8 @@
 "aST" = (
 /obj/structure/rack/rogue/shelf/biggest,
 /obj/item/roguegem/violet,
-/turf/open/floor/carpet/purple,
+/obj/machinery/light/rogue/wallfire/candle/blue,
+/turf/open/floor/rogue/churchbrick,
 /area/rogue/outdoors/exposed/bath/vault{
 	droning_sound_dusk = null;
 	droning_sound_night = null
@@ -20551,6 +20552,16 @@
 /obj/item/reagent_containers/glass/bowl,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/cell)
+"gjr" = (
+/obj/structure/fluff/pillow/purple{
+	pixel_y = 1;
+	pixel_x = 6
+	},
+/turf/open/floor/rogue/churchbrick,
+/area/rogue/outdoors/exposed/bath/vault{
+	droning_sound_dusk = null;
+	droning_sound_night = null
+	})
 "gjv" = (
 /obj/item/natural/rock/coal,
 /turf/open/floor/rogue/naturalstone,
@@ -40971,7 +40982,7 @@
 /obj/item/reagent_containers/powder/moondust,
 /obj/item/reagent_containers/glass/bottle/rogue/poison,
 /obj/item/reagent_containers/glass/bottle/rogue/emberwine,
-/turf/open/floor/carpet/purple,
+/turf/open/floor/rogue/churchbrick,
 /area/rogue/outdoors/exposed/bath/vault{
 	droning_sound_dusk = null;
 	droning_sound_night = null
@@ -42789,7 +42800,8 @@
 /obj/item/reagent_containers/glass/cup/golden{
 	pixel_x = 8
 	},
-/turf/open/floor/carpet/purple,
+/obj/machinery/light/rogue/wallfire/candle/blue,
+/turf/open/floor/rogue/churchbrick,
 /area/rogue/outdoors/exposed/bath/vault{
 	droning_sound_dusk = null;
 	droning_sound_night = null
@@ -47974,9 +47986,8 @@
 "oMw" = (
 /obj/structure/rack/rogue/shelf/biggest,
 /obj/item/clothing/suit/roguetown/armor/plate/full/bikini,
-/obj/item/clothing/suit/roguetown/armor/leather/hide/bikini,
 /obj/item/clothing/suit/roguetown/armor/leather/studded/bikini,
-/turf/open/floor/carpet/purple,
+/turf/open/floor/rogue/churchbrick,
 /area/rogue/outdoors/exposed/bath/vault{
 	droning_sound_dusk = null;
 	droning_sound_night = null
@@ -49659,7 +49670,7 @@
 /obj/item/roguecoin/gold/pile,
 /obj/item/roguecoin/silver/pile,
 /obj/item/roguekey/nightman,
-/turf/open/floor/carpet/purple,
+/turf/open/floor/rogue/churchbrick,
 /area/rogue/outdoors/exposed/bath/vault{
 	droning_sound_dusk = null;
 	droning_sound_night = null
@@ -51632,7 +51643,8 @@
 /obj/item/clothing/neck/roguetown/cursed_collar,
 /obj/item/leash/chain,
 /obj/structure/rack/rogue/shelf/biggest,
-/turf/open/floor/carpet/purple,
+/obj/machinery/light/rogue/wallfire/candle/blue/l,
+/turf/open/floor/rogue/churchbrick,
 /area/rogue/outdoors/exposed/bath/vault{
 	droning_sound_dusk = null;
 	droning_sound_night = null
@@ -52954,6 +52966,15 @@
 	},
 /turf/open/transparent/openspace,
 /area/rogue/indoors/town/warden)
+"qoq" = (
+/obj/effect/decal/carpet/kover_purple{
+	pixel_y = -5
+	},
+/turf/open/floor/rogue/churchbrick,
+/area/rogue/outdoors/exposed/bath/vault{
+	droning_sound_dusk = null;
+	droning_sound_night = null
+	})
 "qos" = (
 /obj/structure/rack/rogue/shelf/biggest,
 /obj/item/clothing/head/roguetown/helmet/sallet,
@@ -57763,7 +57784,7 @@
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/tavern)
 "rSw" = (
-/turf/open/floor/carpet/purple,
+/turf/open/floor/rogue/churchbrick,
 /area/rogue/outdoors/exposed/bath/vault{
 	droning_sound_dusk = null;
 	droning_sound_night = null
@@ -74700,6 +74721,17 @@
 /obj/item/rogue/instrument/drum,
 /turf/open/floor/carpet/red,
 /area/rogue/under/cave/rhgoblinencampment)
+"xkd" = (
+/obj/structure/fluff/pillow/magenta{
+	dir = 8;
+	pixel_x = -6;
+	pixel_y = 4
+	},
+/turf/open/floor/rogue/churchbrick,
+/area/rogue/outdoors/exposed/bath/vault{
+	droning_sound_dusk = null;
+	droning_sound_night = null
+	})
 "xke" = (
 /obj/structure/table/wood{
 	icon_state = "map2"
@@ -135569,7 +135601,7 @@ fJP
 xeg
 lke
 aST
-rSw
+xkd
 rSw
 lke
 lke
@@ -136001,7 +136033,7 @@ fFA
 xeg
 vhJ
 rSw
-rSw
+qoq
 rSw
 fLW
 keK
@@ -136433,7 +136465,7 @@ sFx
 xeg
 lke
 nfp
-rSw
+gjr
 rSw
 lke
 jJY
