@@ -161,6 +161,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	var/heard_by_no_admins = FALSE
 
 	var/list/_interactions	//use AddInteraction() or, preferably, admin_ticket_log()
+	var/last_interaction
+	var/last_admin_interaction
 
 	var/obj/effect/statclick/ahelp/statclick
 
@@ -221,6 +223,9 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		heard_by_no_admins = FALSE
 		send2irc(initiator_ckey, "Ticket #[id]: Answered by [key_name(usr)]")
 	_interactions += "[time_stamp()]: [formatted_message]"
+	last_interaction = world.time
+	if(usr?.client?.holder)
+		last_admin_interaction = world.time
 
 //Removes the ahelp verb and returns it after 2 minutes
 /datum/admin_help/proc/TimeoutVerb()
