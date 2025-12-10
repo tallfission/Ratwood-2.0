@@ -18641,6 +18641,12 @@
 	},
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/shelter/druidgrove)
+"fIc" = (
+/obj/structure/spider/stickyweb{
+	alpha = 90
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/under/cave)
 "fIe" = (
 /obj/structure/mineral_door/wood/deadbolt{
 	dir = 4;
@@ -52884,6 +52890,10 @@
 	},
 /turf/open/transparent/openspace,
 /area/rogue/indoors/town/warden)
+"qna" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/rogue/cobblerock,
+/area/rogue/indoors/shelter/mountains)
 "qnd" = (
 /turf/open/floor/rogue/herringbone,
 /area/rogue/under/cavewet)
@@ -68758,6 +68768,10 @@
 	},
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/town/shop)
+"vrV" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/under/cavewet)
 "vse" = (
 /turf/open/floor/rogue/tile/bath{
 	icon_state = "bathtileratwood"
@@ -74279,12 +74293,6 @@
 "xbD" = (
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors)
-"xbP" = (
-/obj/structure/spider/stickyweb{
-	alpha = 90
-	},
-/turf/open/floor/rogue/dirt/road,
-/area/rogue/under/cave)
 "xcd" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -227027,7 +227035,7 @@ hMX
 jDE
 nqU
 oMq
-okW
+vCh
 oIU
 pAV
 pAV
@@ -227348,7 +227356,7 @@ vHN
 xaf
 whb
 whb
-gBA
+vrV
 whb
 xaf
 whb
@@ -252611,7 +252619,7 @@ vRu
 vRu
 vRu
 vRu
-xbP
+fIc
 fjw
 vRu
 vRu
@@ -253045,7 +253053,7 @@ vRu
 vRu
 vRu
 fjw
-xbP
+fIc
 fjw
 vRu
 vRu
@@ -253479,7 +253487,7 @@ vRu
 vRu
 vRu
 fjw
-xbP
+fIc
 fjw
 vRu
 vRu
@@ -328846,7 +328854,7 @@ tmH
 tmH
 pAk
 pAk
-ilX
+qna
 tmH
 tmH
 mOw
