@@ -10325,10 +10325,8 @@
 /obj/structure/closet/crate/drawer,
 /obj/item/clothing/neck/roguetown/psicross,
 /obj/item/needle,
-/obj/item/natural/bundle/cloth{
-	amount = 8
-	},
 /obj/machinery/light/rogue/wallfire/candle/r,
+/obj/item/natural/bundle/cloth/bandage/full,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/inq/office)
 "dfL" = (
@@ -14711,8 +14709,8 @@
 /obj/item/reagent_containers/glass/bottle/alchemical,
 /obj/item/reagent_containers/glass/bottle/alchemical,
 /obj/item/reagent_containers/glass/bottle/alchemical,
-/obj/item/natural/bundle/cloth,
-/obj/item/natural/bundle/cloth,
+/obj/item/natural/bundle/cloth/bandage/full,
+/obj/item/natural/bundle/cloth/bandage/full,
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/church)
 "eyf" = (
@@ -29668,7 +29666,7 @@
 	})
 "iXc" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/natural/bundle/cloth,
+/obj/item/natural/bundle/cloth/bandage/full,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors)
 "iXw" = (
@@ -29869,9 +29867,7 @@
 	icon_state = "borderfall";
 	pixel_y = 8
 	},
-/obj/item/natural/bundle/cloth{
-	amount = 6
-	},
+/obj/item/natural/bundle/cloth/bandage/full,
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/town/manor/rockhill)
 "jbr" = (
@@ -33459,12 +33455,10 @@
 /obj/structure/closet/crate/drawer,
 /obj/item/clothing/neck/roguetown/psicross,
 /obj/item/needle,
-/obj/item/natural/bundle/cloth{
-	amount = 8
-	},
 /obj/structure/fluff/walldeco/psybanner/red{
 	pixel_y = 32
 	},
+/obj/item/natural/bundle/cloth/bandage/full,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/inq)
 "kfb" = (
@@ -49973,7 +49967,7 @@
 "pqH" = (
 /obj/structure/rack/rogue,
 /obj/item/needle,
-/obj/item/natural/bundle/cloth,
+/obj/item/natural/bundle/cloth/bandage/full,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/town/church)
 "pqO" = (
@@ -74855,7 +74849,7 @@
 /area/rogue/outdoors/bograt/south)
 "xkI" = (
 /obj/structure/bed/rogue/inn/hay,
-/obj/item/natural/bundle/cloth,
+/obj/item/natural/bundle/cloth/bandage,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors)
 "xkO" = (
