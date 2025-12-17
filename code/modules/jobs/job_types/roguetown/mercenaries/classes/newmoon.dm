@@ -41,7 +41,7 @@
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_NOVICE,
 	)
 
-	extra_context = "Restricted to: Tabaxi & Wild-Kin."
+	extra_context = "Restricted to: Tabaxi | Wild-Kin | Half-Kin | Elves | Tiefling."
 
 /datum/outfit/job/roguetown/mercenary/newmoon
 	allowed_patrons = list(/datum/patron/divine/noc)
