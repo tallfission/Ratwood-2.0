@@ -10906,9 +10906,6 @@
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/vampire_manor)
 "Zj" = (
-/obj/structure/curtain/bounty{
-	color = "grey"
-	},
 /obj/structure/curtain{
 	color = "#ad885c"
 	},
