@@ -1069,42 +1069,35 @@ GLOBAL_LIST_EMPTY(loadout_items)
 /datum/loadout_item/tri_astrata_tabard
 	name = "Astratan Tabard"
 	path = /obj/item/clothing/cloak/templar/astratan
-	triumph_cost = 5
+
 
 /datum/loadout_item/tri_malum_tabard
 	name = "Malumite Tabard"
 	path = /obj/item/clothing/cloak/templar/malumite
-	triumph_cost = 5
 
 /datum/loadout_item/tri_necra_tabard
 	name = "Necran Tabard"
 	path = /obj/item/clothing/cloak/templar/necran
-	triumph_cost = 5
 
 /datum/loadout_item/tri_pestra_tabard
 	name = "Pestran Tabard"
 	path = /obj/item/clothing/cloak/templar/pestran
-	triumph_cost = 5
 
 /datum/loadout_item/tri_eora_tabard
 	name = "Eoran Tabard"
 	path = /obj/item/clothing/cloak/templar/eoran
-	triumph_cost = 5
 
 /datum/loadout_item/tri_xylix_cloak
 	name = "Xylixian Cloak"
 	path = /obj/item/clothing/cloak/templar/xylixian
-	triumph_cost = 5
 
 /datum/loadout_item/tri_psydon_tabard
 	name = "Psydonian Tabard"
 	path = /obj/item/clothing/cloak/psydontabard
-	triumph_cost = 5
 
 /datum/loadout_item/tri_abyssor_tabard
 	name = "Abyssorite Tabard"
 	path = /obj/item/clothing/cloak/abyssortabard
-	triumph_cost = 5
 
 /datum/loadout_item/tri_see_tabard
 	name = "See Tabard"
@@ -1119,39 +1112,6 @@ GLOBAL_LIST_EMPTY(loadout_items)
 /datum/loadout_item/tri_justice_tabard
 	name = "Justice Tabard (Ravox)"
 	path = /obj/item/clothing/cloak/templar/ravox
-	triumph_cost = 5
-
-// CLOTHING - ACCESSORIES
-/datum/loadout_item/tri_silver_pin
-	name = "Silver Hairpin"
-	path = /obj/item/lockpick/goldpin/silver
-	triumph_cost = 3
-
-/datum/loadout_item/tri_gold_pin
-	name = "Gold Hairpin"
-	path = /obj/item/lockpick/goldpin
-	triumph_cost = 5
-
-/datum/loadout_item/tri_gold_pin/nobility_check(client/C)
-	var/datum/preferences/P = C.prefs
-	if(!P)
-		return FALSE
-	// Check if user selected Nobility virtue
-	if(P.virtue && istype(P.virtue, /datum/virtue/utility/noble))
-		return TRUE
-	if(P.virtuetwo && istype(P.virtuetwo, /datum/virtue/utility/noble))
-		return TRUE
-	// Check if user has high priority for any noble, courtier, or yeoman job
-	for(var/job_title in GLOB.noble_positions)
-		if(P.job_preferences[job_title] == JP_HIGH)
-			return TRUE
-	for(var/job_title in GLOB.courtier_positions)
-		if(P.job_preferences[job_title] == JP_HIGH)
-			return TRUE
-	for(var/job_title in GLOB.yeoman_positions)
-		if(P.job_preferences[job_title] == JP_HIGH)
-			return TRUE
-	return FALSE
 
 // CLOTHING - DRESSES & ROBES
 /datum/loadout_item/tri_princess_dress

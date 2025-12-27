@@ -1129,6 +1129,10 @@
 
 		switch(action)
 			if("item")
+				// Clear any stale selection data and close existing windows
+				GLOB.temp_loadout_selection = null
+				usr << browse(null, "window=loadout_select")
+				
 				// Initialize lists for available loadouts and selected loadouts at the start of the block
 				var/list/loadouts_available = list()
 				var/list/selected_loadouts = list()
@@ -1258,10 +1262,12 @@
 						is_locked = TRUE
 						lock_reason = "🔒 Requires: Nobility virtue, or High priority for Noble/Courtier/Yeoman jobs"
 					
-					// Skip if already selected in another slot
+					// Skip if already selected in another slot (but allow if it's the current slot's item)
 					var/datum/loadout_item/current_item = vars[slot_var]
-					if(item.type in selected_loadouts && current_item?.type != item.type)
-						continue
+					if(item.type in selected_loadouts)
+						// Only skip if it's NOT the item currently in this slot
+						if(!current_item || current_item.type != item.type)
+							continue
 					
 					icon_counter++
 					
@@ -1318,6 +1324,8 @@
 					</html>
 				"}
 				
+				// Small delay to ensure window closes/refreshes properly
+				sleep(1)
 				usr << browse(html, "window=loadout_select;size=500x600")
 				// Store the available items temporarily for callback
 				GLOB.temp_loadout_selection = list("prefs" = src, "items" = loadouts_available, "slot" = slot)
