@@ -1441,6 +1441,11 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 		var/slot_var = slot == 1 ? "extra_language_1" : "extra_language_2"
 		
 		switch(action)
+			if("clear")
+				vars[slot_var] = "None"
+				to_chat(usr, span_notice("Cleared language slot [slot]."))
+				save_character()
+				open_vices_menu(usr)
 			if("select", "change")
 				// Show language selection menu
 				var/static/list/selectable_languages = list(
@@ -1501,3 +1506,5 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 							return
 						vars[slot_var] = language_path
 						to_chat(usr, span_notice("Selected [chosen_language] for language slot [slot] ([slot_cost] Triumphs)."))
+					save_character()
+				open_vices_menu(usr)
