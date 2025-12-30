@@ -145,10 +145,4 @@
 					/obj/item/clothing/mask/rogue/exoticsilkmask,
 				)
 
-/datum/supply_pack/rogue/wardrobe/reinforced_hood
-	name = "Reinforced Hood"
-	cost = 120//It's armour. Quite good, given layering, too. Someone else can adjust this.
-	contains = list(
-					/obj/item/clothing/head/roguetown/roguehood/reinforced,
-				)
 
