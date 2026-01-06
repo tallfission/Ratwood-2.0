@@ -7,6 +7,7 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	var/donoritem			//autoset on new if null
 	var/list/ckeywhitelist
 	var/triumph_cost
+	var/keep_loadout_stats = FALSE	// If TRUE, item keeps default values (not nerfed)
 
 /datum/loadout_item/New()
 	if(isnull(donoritem))
@@ -99,7 +100,7 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	triumph_cost = 2
 
 /datum/loadout_item/aaneedle
-	name = "Decrepit Alloy Needle"
+	name = "Ancient Alloy Needle"
 	path = /obj/item/needle/aalloy
 	triumph_cost = 2
 
@@ -113,31 +114,87 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	path = /obj/item/storage/roguebag
 	triumph_cost = 2
 
-//ANCIENT TOOLS (Decrepit/Aalloy)
+//ANCIENT TOOLS (Ancient Alloy)
 
 /datum/loadout_item/ancient_hammer
-	name = "Decrepit Hammer"
+	name = "Ancient Hammer"
 	path = /obj/item/rogueweapon/hammer/aalloy
-	triumph_cost = 2
+	triumph_cost = 3
 
 /datum/loadout_item/ancient_tongs
-	name = "Decrepit Tongs"
+	name = "Ancient Tongs"
 	path = /obj/item/rogueweapon/tongs/aalloy
-	triumph_cost = 2
+	triumph_cost = 3
 
 /datum/loadout_item/ancient_pick
-	name = "Decrepit Pick"
+	name = "Ancient Pick"
 	path = /obj/item/rogueweapon/pick/aalloy
-	triumph_cost = 2
+	triumph_cost = 3
 
 /datum/loadout_item/ancient_shovel
-	name = "Decrepit Shovel"
+	name = "Ancient Shovel"
 	path = /obj/item/rogueweapon/shovel/aalloy
-	triumph_cost = 2
+	triumph_cost = 3
 
 /datum/loadout_item/ancient_hoe
-	name = "Decrepit Hoe"
+	name = "Ancient Hoe"
 	path = /obj/item/rogueweapon/hoe/aalloy
+	triumph_cost = 3
+
+/datum/loadout_item/ancient_sickle
+	name = "Ancient Sickle"
+	path = /obj/item/rogueweapon/sickle/aalloy
+	triumph_cost = 3
+
+/datum/loadout_item/ancient_thresher
+	name = "Ancient Thresher"
+	path = /obj/item/rogueweapon/thresher/aalloy
+	triumph_cost = 3
+
+/datum/loadout_item/ancient_pitchfork
+	name = "Ancient Pitchfork"
+	path = /obj/item/rogueweapon/pitchfork/aalloy
+	triumph_cost = 3
+
+//COOKWARE
+/datum/loadout_item/ancient_pan
+	name = "Ancient Pan"
+	path = /obj/item/cooking/pan/aalloy
+	triumph_cost = 2
+
+/datum/loadout_item/ancient_pot
+	name = "Ancient Pot"
+	path = /obj/item/reagent_containers/glass/bucket/pot/aalloy
+	triumph_cost = 2
+
+/datum/loadout_item/ancient_platter
+	name = "Ancient Platter"
+	path = /obj/item/cooking/platter/aalloy
+	triumph_cost = 2
+
+/datum/loadout_item/ancient_bowl
+	name = "Ancient Bowl"
+	path = /obj/item/reagent_containers/glass/bowl/aalloy
+	triumph_cost = 2
+
+/datum/loadout_item/ancient_mug
+	name = "Ancient Mug"
+	path = /obj/item/reagent_containers/glass/cup/aalloymug
+	triumph_cost = 2
+
+/datum/loadout_item/ancient_goblet
+	name = "Ancient Goblet"
+	path = /obj/item/reagent_containers/glass/cup/aalloygob
+	triumph_cost = 2
+
+/datum/loadout_item/ancient_spoon
+	name = "Ancient Spoon"
+	path = /obj/item/kitchen/spoon/aalloy
+	triumph_cost = 2
+
+/datum/loadout_item/ancient_fork
+	name = "Ancient Fork"
+	path = /obj/item/kitchen/fork/aalloy
 	triumph_cost = 2
 
 //HATS
@@ -725,7 +782,7 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	path = /obj/item/clothing/neck/roguetown/psicross/eora
 
 /datum/loadout_item/psicross/zizo
-	name = "Decrepit Zcross"
+	name = "Ancient Zcross"
 	path = /obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy
 
 /datum/loadout_item/wedding_band
@@ -987,35 +1044,78 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Wooden Club"
 	path = /obj/item/rogueweapon/mace/woodclub
 	triumph_cost = 2
+	keep_loadout_stats = TRUE
 
 // AXES
 /datum/loadout_item/tri_bone_axe
 	name = "Bone Axe"
 	path = /obj/item/rogueweapon/stoneaxe/boneaxe
 	triumph_cost = 2
+	keep_loadout_stats = TRUE
+
+/datum/loadout_item/ancient_axe
+	name = "Ancient Axe"
+	path = /obj/item/rogueweapon/stoneaxe/woodcut/aaxe
+	triumph_cost = 4
 
 // SWORDS
 /datum/loadout_item/tri_stone_sword
 	name = "Stone Sword"
 	path = /obj/item/rogueweapon/sword/stone
 	triumph_cost = 2
+	keep_loadout_stats = TRUE
+
+/datum/loadout_item/ancient_gladius
+	name = "Ancient Gladius"
+	path = /obj/item/rogueweapon/sword/short/gladius/pagladius
+	triumph_cost = 4
+
+/datum/loadout_item/ancient_khopesh
+	name = "Ancient Khopesh"
+	path = /obj/item/rogueweapon/sword/sabre/palloy
+	triumph_cost = 4
 
 // DAGGERS & KNIVES
 /datum/loadout_item/tri_stone_knife
 	name = "Stone Knife"
 	path = /obj/item/rogueweapon/huntingknife/stoneknife
 	triumph_cost = 2
+	keep_loadout_stats = TRUE
+
+// MACES & BLUNT
+/datum/loadout_item/ancient_mace
+	name = "Ancient Mace"
+	path = /obj/item/rogueweapon/mace/goden/steel/paalloy
+	triumph_cost = 4
 
 // POLEARMS & SPEARS
 /datum/loadout_item/tri_stone_spear
 	name = "Stone Spear"
 	path = /obj/item/rogueweapon/spear/stone
 	triumph_cost = 2
+	keep_loadout_stats = TRUE
 
 /datum/loadout_item/tri_bone_spear
 	name = "Bone Spear"
 	path = /obj/item/rogueweapon/spear/bonespear
 	triumph_cost = 2
+	keep_loadout_stats = TRUE
+
+/datum/loadout_item/ancient_spear
+	name = "Ancient Spear"
+	path = /obj/item/rogueweapon/spear/aalloy
+	triumph_cost = 4
+
+// ARMOR & CLOTHING
+/datum/loadout_item/ancient_mask
+	name = "Ancient Mask"
+	path = /obj/item/clothing/mask/rogue/facemask/steel/paalloy
+	triumph_cost = 4
+
+/datum/loadout_item/ancient_kilt
+	name = "Ancient Kilt"
+	path = /obj/item/clothing/under/roguetown/chainlegs/kilt/paalloy
+	triumph_cost = 4
 
 //─────────────────────────────────────────────────────────────
 // 3 TRIUMPH - Wooden Polearms & Noble Clothing
@@ -1026,16 +1126,19 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Quarterstaff"
 	path = /obj/item/rogueweapon/woodstaff/quarterstaff
 	triumph_cost = 3
+	keep_loadout_stats = TRUE
 
 /datum/loadout_item/tri_woodstaff
 	name = "Woodstaff"
 	path = /obj/item/rogueweapon/woodstaff
 	triumph_cost = 3
+	keep_loadout_stats = TRUE
 
 /datum/loadout_item/tri_scythe
 	name = "Peasant Scythe"
 	path = /obj/item/rogueweapon/scythe
 	triumph_cost = 3
+	keep_loadout_stats = TRUE
 
 // CLOTHING - TABARDS & RELIGIOUS CLOAKS
 /datum/loadout_item/tri_astrata_tabard
