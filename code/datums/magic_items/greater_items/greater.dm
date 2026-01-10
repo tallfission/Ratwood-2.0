@@ -40,7 +40,7 @@
 	var/list/last_used = list()
 
 /datum/magic_item/greater/lightning/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
-	if(world.time < (src.last_used[source] + (1 MINUTES + 40 SECONDS))) //thanks borbop
+	if(world.time < (src.last_used[source] + (40 SECONDS)))
 		return
 
 	if(isliving(target))
