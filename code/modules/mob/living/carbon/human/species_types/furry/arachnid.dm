@@ -5,7 +5,7 @@
 	name = "Arachnid"
 	id = "lamia"
 	desc = "<b>Arachnid</b><br>\
-	(-2 Strength, -2 Speed, -1 Constitution, +1 Perception, +1 Intelligence) Longstrider Trait, Venomous Trait)"
+	(+1 Strength, -1 Speed, Longstrider Trait, Venomous Trait)"
 
 	expanded_desc = ""
 
@@ -38,7 +38,7 @@
 		OFFSET_BREASTS_F = list(0,-1), \
 		)
 	inherent_traits = list(TRAIT_LONGSTRIDER, TRAIT_VENOMOUS, TRAIT_WEBWALK, TRAIT_CALTROPIMMUNE)
-	race_bonus = list(STAT_STRENGTH = -2, STAT_SPEED = -2, STAT_CONSTITUTION = -1, STAT_PERCEPTION = 1, STAT_INTELLIGENCE = 1)
+	race_bonus = list(STAT_STRENGTH = 1, STAT_SPEED = -1)
 	enflamed_icon = "widefire"
 
 	organs = list(

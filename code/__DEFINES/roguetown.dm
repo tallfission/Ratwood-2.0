@@ -84,6 +84,7 @@ Balloon Alert / Floating Text defines
 	/datum/species/anthromorphsmall,\
 	/datum/species/kobold,\
 	/datum/species/tieberian,\
+	/datum/species/arachnid,\
 
 #define RACES_SHUNNED \
 	/datum/species/dullahan,\
