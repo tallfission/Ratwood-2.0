@@ -15,10 +15,11 @@
 
 	use_titles = TRUE
 	race_titles = list(
-	"Cat-Critter", "Dog-Critter", "Venard-Critter", "Rous-Critter", "Possum-Critter",
-	"Pig-Critter", "Rabbit-Critter", "Raccoon-Critter", "Red Panda-Critter", "Seal-Critter",
-	"Hyena-Critter", "Coyote-Critter", "Jackal-Critter", "Bat-Critter", "Otter-Critter",
-	"Monster-Critter"
+	"Catvolk", "Dogvolk", "Volfvolk", "Lionvolk", "Venardvolk", "Tigervolk", "Sheepvolk",
+	"Goatvolk", "Rousvolk", "Possumvolk", "Pigvolk", "Boarvolk", "Rabbitvolk", "Horsevolk",
+	"Donkeyvolk", "Hyenavolk", "Deervolk", "Bearvolk", "Pandavolk", "Coyotevolk", "Moosevolk",
+	"Jackalvolk", "Panthervolk", "Lynxvolk", "Leopardvolk", "Monkeyvolk", "Birdvolk", "Sealvolk",
+	"Batvolk", "Ottervolk", "Cowvolk", "Bullvolk", "Beevolk", "Monstervolk", "Chimeravolk"
 	)
 
 	species_traits = list(
