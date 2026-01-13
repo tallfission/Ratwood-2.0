@@ -257,7 +257,11 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 
 /datum/mass_direct_click_intercept/Destroy()
 	GLOB.mass_direct_intercepts -= src
-	cleanup()
+	// Don't call cleanup() here as it may have already been called and will try to qdel again
+	if(owner && owner.click_intercept == src)
+		owner.click_intercept = null
+		owner.mouse_pointer_icon = null
+		owner.mob.update_mouse_pointer()
 	. = ..()
 
 /datum/mass_direct_click_intercept/proc/restore_cursor()
@@ -283,8 +287,11 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 		if("passive")
 			handle_passive_command(user, T)
 	
-	// Auto-cleanup after single command
-	cleanup()
+	// Auto-cleanup after single command - but don't call qdel, just clean up references
+	if(owner && owner.click_intercept == src)
+		owner.click_intercept = null
+		owner.mouse_pointer_icon = null
+		owner.mob.update_mouse_pointer()
 	to_chat(user, span_notice("Command executed."))
 	
 	return TRUE
@@ -298,6 +305,8 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 			continue
 		if(!M.faction || !(faction in M.faction))
 			continue
+		if(M.stat == DEAD)
+			continue // Skip dead mobs
 		
 		// Handle carbon skeletons (summoned type only)
 		if(istype(M, /mob/living/carbon/human/species/skeleton/npc/summoned))
@@ -305,7 +314,7 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 			skel.set_command("move", T)
 			count++
 		// Handle simple mobs with AI controller
-		else if(M.ai_controller)
+		else if(M.ai_controller && !istype(M, /mob/living/simple_animal/hostile))
 			var/datum/ai_controller/ai = M.ai_controller
 			// Stop any active attack routines
 			if(M in active_attack_routines)
@@ -317,22 +326,27 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 			ai.clear_blackboard_key(BB_TRAVEL_DESTINATION)
 			ai.clear_blackboard_key(BB_BASIC_MOB_RETALIATE_LIST)
 			ai.set_blackboard_key(BB_TRAVEL_DESTINATION, T)
+			// Ensure AI is active and processing
+			if(ai.ai_status == AI_STATUS_OFF)
+				ai.set_ai_status(AI_STATUS_ON)
+			ai.PauseAi(0) // Unpause if paused
 			count++
-		// Handle simple animals without AI controller (use walk_to)
+		// Handle simple animals without AI controller (use walk_to) OR hostile animals with AI that don't handle travel well
 		else if(istype(M, /mob/living/simple_animal))
 			var/mob/living/simple_animal/S = M
 			// Stop any active attack routines
 			if(S in active_attack_routines)
 				active_attack_routines[S] = FALSE // Signal stop
 				active_attack_routines -= S
-			// Use simple movement - force move then start walking towards target
-			var/delay = 2
-			if(istype(S, /mob/living/simple_animal/hostile) && S:move_to_delay)
-				delay = S:move_to_delay
-			// Stop current movement and start walking towards target
+			// For hostile animals with AI, turn off AI temporarily and use direct movement
+			var/had_ai = FALSE
+			if(S.ai_controller)
+				S.ai_controller.set_ai_status(AI_STATUS_OFF)
+				had_ai = TRUE
+			// Stop current movement
 			walk(S, 0)
-			spawn(1)
-				walk_towards(S, T, 0, delay)
+			// Start custom movement routine that ensures reaching destination
+			INVOKE_ASYNC(src, PROC_REF(handle_simple_movement), S, T, had_ai)
 			count++
 		// Handle old NPC AI system (carbon humans with mode variable)
 		else if(istype(M, /mob/living/carbon/human))
@@ -380,6 +394,8 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 			continue
 		if(!M.faction || !(faction in M.faction))
 			continue
+		if(M.stat == DEAD)
+			continue // Skip dead mobs
 		if(M == target)
 			continue
 		
@@ -464,6 +480,8 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 				continue
 			if(!M.faction || !(faction in M.faction))
 				continue
+			if(M.stat == DEAD)
+				continue // Skip dead mobs
 			// Handle carbon skeletons with commanded behavior
 			if(istype(M, /mob/living/carbon/human/species/skeleton/npc/summoned))
 				var/mob/living/carbon/human/species/skeleton/npc/summoned/skel = M
@@ -521,6 +539,8 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 			continue
 		if(!M.faction || !(faction in M.faction))
 			continue
+		if(M.stat == DEAD)
+			continue // Skip dead mobs
 		if(M == follow_target)
 			continue
 		
@@ -615,6 +635,8 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 			continue
 		if(!M.faction || !(faction in M.faction))
 			continue
+		if(M.stat == DEAD)
+			continue // Skip dead mobs
 		total_mobs++
 		
 		// Check if mob is currently passive
@@ -641,6 +663,8 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 			continue
 		if(!M.faction || !(faction in M.faction))
 			continue
+		if(M.stat == DEAD)
+			continue // Skip dead mobs
 		
 		// Handle carbon skeletons
 		if(istype(M, /mob/living/carbon/human/species/skeleton/npc/summoned))
@@ -746,7 +770,9 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 		owner.click_intercept = null
 		owner.mouse_pointer_icon = null
 		owner.mob.update_mouse_pointer()
-	qdel(src)
+	// Don't call qdel here if we're already being destroyed
+	if(!QDELETED(src))
+		qdel(src)
 
 // Find and set the best destructive intent for attacking objects
 /datum/mass_direct_click_intercept/proc/set_destructive_intent(mob/living/attacker)
@@ -895,3 +921,175 @@ GLOBAL_LIST_EMPTY(mass_direct_intercepts)
 
 	// Cleanup tracking when routine ends
 	active_attack_routines -= attacker
+
+// Monitor movement for mobs with AI - stop when destination reached and re-enable AI
+/datum/mass_direct_click_intercept/proc/monitor_movement_ai(mob/living/simple_animal/S, turf/target_turf)
+	set waitfor = FALSE
+	
+	if(!S || QDELETED(S) || !target_turf)
+		return
+	
+	// Give the mob time to start moving
+	sleep(30) // Wait 3 seconds before starting to monitor
+	
+	var/initial_dist = get_dist(S, target_turf)
+	// If already very close, don't bother monitoring
+	if(initial_dist <= 1)
+		return
+	
+	var/max_checks = 1200 // Maximum time to monitor (2 minutes)
+	var/checks = 0
+	var/last_dist = initial_dist
+	var/no_progress_count = 0
+	
+	while(checks < max_checks && S && !QDELETED(S))
+		sleep(5) // Check every half second
+		checks++
+		
+		var/current_dist = get_dist(S, target_turf)
+		
+		// If we're at the destination, stop
+		if(current_dist <= 1)
+			walk(S, 0)
+			if(S.ai_controller)
+				S.ai_controller.set_ai_status(AI_STATUS_ON)
+			return
+		
+		// Check if the mob has made progress
+		if(current_dist >= last_dist)
+			no_progress_count++
+			// Only stop if the mob hasn't made progress for a significant time (15 seconds)
+			if(no_progress_count >= 30)
+				walk(S, 0)
+				if(S.ai_controller)
+					S.ai_controller.set_ai_status(AI_STATUS_ON)
+				return
+		else
+			no_progress_count = 0 // Reset counter if making progress
+		
+		last_dist = current_dist
+	
+	// Timeout reached - stop movement and restore AI
+	if(S && !QDELETED(S))
+		walk(S, 0)
+		if(S.ai_controller)
+			S.ai_controller.set_ai_status(AI_STATUS_ON)
+
+// Monitor movement for mobs without AI - just stop when destination reached
+/datum/mass_direct_click_intercept/proc/monitor_movement_basic(mob/living/simple_animal/S, turf/target_turf)
+	set waitfor = FALSE
+	
+	if(!S || QDELETED(S) || !target_turf)
+		return
+	
+	// Give the mob time to start moving
+	sleep(30) // Wait 3 seconds before starting to monitor
+	
+	var/initial_dist = get_dist(S, target_turf)
+	// If already very close, don't bother monitoring
+	if(initial_dist <= 1)
+		return
+	
+	var/max_checks = 1200 // Maximum time to monitor (2 minutes)
+	var/checks = 0
+	var/last_dist = initial_dist
+	var/no_progress_count = 0
+	
+	while(checks < max_checks && S && !QDELETED(S))
+		sleep(5) // Check every half second
+		checks++
+		
+		var/current_dist = get_dist(S, target_turf)
+		
+		// If we're at the destination, stop
+		if(current_dist <= 1)
+			walk(S, 0)
+			return
+		
+		// Check if the mob has made progress
+		if(current_dist >= last_dist)
+			no_progress_count++
+			// Only stop if the mob hasn't made progress for a significant time (15 seconds)
+			if(no_progress_count >= 30)
+				walk(S, 0)
+				return
+		else
+			no_progress_count = 0 // Reset counter if making progress
+		
+		last_dist = current_dist
+	
+	// Timeout reached - stop movement
+	if(S && !QDELETED(S))
+		walk(S, 0)
+
+// Custom movement handler that ensures mobs reach their destination
+/datum/mass_direct_click_intercept/proc/handle_simple_movement(mob/living/simple_animal/S, turf/target_turf, had_ai = FALSE)
+	set waitfor = FALSE
+	
+	if(!S || QDELETED(S) || !target_turf)
+		return
+	
+	var/initial_dist = get_dist(S, target_turf)
+	if(initial_dist <= 1)
+		if(had_ai && S.ai_controller)
+			S.ai_controller.set_ai_status(AI_STATUS_ON)
+		return
+	
+	// Get movement delay
+	var/delay = 2
+	if(istype(S, /mob/living/simple_animal/hostile) && S:move_to_delay)
+		delay = S:move_to_delay
+	
+	var/max_time = 600 // 60 seconds maximum
+	var/time_elapsed = 0
+	var/stuck_time = 0
+	var/last_dist = initial_dist
+	
+	// Main movement loop
+	while(time_elapsed < max_time && S && !QDELETED(S))
+		var/current_dist = get_dist(S, target_turf)
+		
+		// Check if we've reached the destination
+		if(current_dist <= 1)
+			walk(S, 0)
+			if(had_ai && S.ai_controller)
+				S.ai_controller.set_ai_status(AI_STATUS_ON)
+			return
+		
+		// Try different movement approaches based on distance
+		if(current_dist <= 3)
+			// Close range - use walk_towards for precise movement
+			walk(S, 0)
+			walk_towards(S, target_turf, 0, delay)
+		else
+			// Long range - use walk_to for pathfinding
+			walk(S, 0)
+			walk_to(S, target_turf, 0, delay)
+		
+		// Wait and check progress
+		sleep(50) // Wait 5 seconds
+		time_elapsed += 5
+		
+		var/new_dist = get_dist(S, target_turf)
+		
+		// Check if making progress
+		if(new_dist >= last_dist)
+			stuck_time += 5
+			// If stuck for 20 seconds, try alternative movement
+			if(stuck_time >= 20)
+				// Try walking in the general direction step by step
+				var/dir_to_target = get_dir(S, target_turf)
+				if(dir_to_target)
+					walk(S, 0)
+					walk(S, dir_to_target, delay)
+					sleep(20) // Give it 2 seconds to move
+					stuck_time = 0 // Reset stuck timer after manual intervention
+		else
+			stuck_time = 0 // Reset stuck timer if making progress
+			last_dist = new_dist
+	
+	// Final cleanup
+	if(S && !QDELETED(S))
+		walk(S, 0)
+		if(had_ai && S.ai_controller)
+			S.ai_controller.set_ai_status(AI_STATUS_ON)
