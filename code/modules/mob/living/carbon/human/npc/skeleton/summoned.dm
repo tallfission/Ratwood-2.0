@@ -76,7 +76,8 @@
 			command_target = null
 
 /mob/living/carbon/human/species/skeleton/npc/summoned/proc/receive_command_text(msg)
-	visible_message("<b>[src]</b> [msg]")
+	if(!IsDeadOrIncap())
+		visible_message("<b>[src]</b> [msg]")
 
 /mob/living/carbon/human/species/skeleton/npc/summoned/process_ai()
 	if(IsDeadOrIncap())
@@ -87,15 +88,13 @@
 		if("follow")
 			if(!command_target || !ismob(command_target))
 				command_mode = "idle"
-				clear_path()
-				pathfinding_target = null
+				walk(src, 0)
 				return
 
 			var/turf/target_turf = get_turf(command_target)
 			if(!target_turf)
 				command_mode = "idle"
-				clear_path()
-				pathfinding_target = null
+				walk(src, 0)
 				return
 
 			var/dist = get_dist(src, command_target)
@@ -112,9 +111,7 @@
 						Move(next_step)
 						return
 					else
-						start_pathing_to(the_stairs)
-						if(length(myPath))
-							move_along_path()
+						step_to(src, the_stairs)
 						return
 
 				if(HAS_TRAIT(src, TRAIT_ZJUMP))
@@ -126,33 +123,21 @@
 				for(var/obj/structure/stairs/S in view(5, src))
 					var/dir_to_stairs = get_dir(src, S)
 					if((target_z > z && S.dir == dir_to_stairs) || (target_z < z && GLOB.reverse_dir[S.dir] == dir_to_stairs))
-						start_pathing_to(S)
-						if(length(myPath))
-							move_along_path()
+						step_to(src, S)
 						return
 
-				// No valid z transition this tick
-				clear_path()
-				pathfinding_target = null
+				walk(src, 0)
 				return
 
-			// === Same-z follow behavior (continuous) ===
-			var/follow_dist = 2
-			var/repath_dist = 3
-
-			if(dist > repath_dist)
-				var/turf/follow_turf = get_turf(command_target)
-				if(follow_turf && pathfinding_target != follow_turf)
-					start_pathing_to(follow_turf)
-			else if(dist <= follow_dist)
-				clear_path()
-				pathfinding_target = null
-
-			if(length(myPath))
-				move_along_path()
+			// === Same-z follow ===
+			if(dist > 2)
+				walk_to(src, command_target, 0, 2)
+			else
+				walk(src, 0)
 			return
 
 		if("move")
+			walk_to(src, 0)
 			if(!command_target)
 				command_mode = "idle"
 				clear_path()
@@ -174,6 +159,7 @@
 			return
 
 		if("attack")
+			walk_to(src, 0)
 			if(command_target && istype(command_target, /mob))
 				if(!should_target(command_target))
 					command_mode = "idle"
