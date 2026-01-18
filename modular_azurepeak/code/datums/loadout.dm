@@ -210,6 +210,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
     name = "Maid's Headband"
     path = /obj/item/clothing/head/roguetown/maidband
 
+/datum/loadout_item/scarf
+	name = "Scarf"
+	path = /obj/item/clothing/head/roguetown/scarf
+
 /datum/loadout_item/nurseveil
 	name = "Nurse's Veil"
 	path = /obj/item/clothing/head/roguetown/veiled
