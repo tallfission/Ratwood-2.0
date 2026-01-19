@@ -878,7 +878,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 /obj/item/proc/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE)
 	if((is_silver || smeltresult == /obj/item/ingot/silver) && (HAS_TRAIT(M, TRAIT_SILVER_WEAK) &&  !M.has_status_effect(STATUS_EFFECT_ANTIMAGIC)))
 		var/datum/antagonist/vampire/V_lord = M.mind?.has_antag_datum(/datum/antagonist/vampire/)
-		if(V_lord.generation >= GENERATION_METHUSELAH)
+		if(V_lord?.generation >= GENERATION_METHUSELAH)
 			return
 
 		to_chat(M, span_userdanger("I can't pick up the silver, it is my BANE!"))
