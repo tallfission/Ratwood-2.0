@@ -524,8 +524,5 @@
 
 /obj/item/paper/scroll/writ_of_esteem/otavan
 	desc = "A formal Writ of Esteem used to showcase an envoy's authenticity. This one bears the seal of the Principality of Otava."
-	info = "By word of the Prince Henri the Silver-Blooded, and with the Seal of Approval by High Inquisitor Archibald, does this writ gain power only given to the men and women truly blessed by PSYDON.\
-		The bearer of this writ is empowered to speak, negotiate, and act in the Principality's name, and to act with the full support of the Otavan Holy See. Furthermore, any true believer of PSYDON and\
-		HIS name shall provide any aid to its bearer, for they bring forth HIS will and carry HIS strength. Let it be known that should this edict be honored, favor and respect is forever earned.\
-		Should any individual wrong the men and women of PSYDON and the Holy See, however, will have HIS wrath driven unto their land."
+	info = "By word of the Prince Henri the Silver-Blooded, and with the Seal of Approval by High Inquisitor Archibald, does this writ gain power only given to the men and women truly blessed by PSYDON. The bearer of this writ is empowered to speak, negotiate, and act in the Principality's name, and to act with the full support of the Otavan Holy See. Furthermore, any true believer of PSYDON and HIS name shall provide any aid to its bearer, for they bring forth HIS will and carry HIS strength. Let it be known that should this edict be honored, favor and respect is forever earned. Should any individual wrong the men and women of PSYDON and the Holy See, however, will have HIS wrath driven unto their land."
 	icon_state = "contractsigned"
