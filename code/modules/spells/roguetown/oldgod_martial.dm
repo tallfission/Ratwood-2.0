@@ -232,3 +232,137 @@ Given the nature of Psydon, two of these are INTENDED to be refluffed Tennite sp
 	to_chat(owner, span_warning("I feel so cold..."))
 
 #undef INVIOLABILITY_FILTER
+
+//Syonacrum. An ability for arbalists to conjure a special bolt, at the cost of near slaying themselves.
+//Of course, this is limited to arbalist. Why would anyone else need or want this?
+/obj/effect/proc_holder/spell/self/psydonic_lux_bolt
+	name = "SYONACRUM"
+	desc = "A miracle of an ancient order, allowing one to form portions of their lux into suitable implements. \
+	In your case, projectiles, for your beloved sauterelle. The effects of such are only felt shortly after use, so be swift. \
+	<small><span class='bloody'>A greater miracle.</span></small>"
+	overlay_state = "psy_syonacrum"
+	recharge_time = 6 MINUTES
+	movement_interrupt = FALSE
+	chargedrain = 0
+	chargetime = 1 SECONDS
+	charging_slowdown = 2
+	chargedloop = null
+	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
+	sound = 'sound/magic/woundheal_crunch.ogg'
+	invocations = list("*scream")
+	invocation_type = "shout"
+	antimagic_allowed = TRUE
+	miracle = TRUE
+	devotion_cost = 100
+	var/obj/item/rogueweapon/conjured_lux_bolt = null
+
+/obj/effect/proc_holder/spell/self/psydonic_lux_bolt/cast(mob/living/carbon/human/user)
+	if(!isliving(user))
+		return FALSE
+
+	if(src.conjured_lux_bolt)
+		qdel(conjured_lux_bolt)
+	var/obj/item/ammo_casing/caseless/rogue/heavy_bolt/R = new /obj/item/ammo_casing/caseless/rogue/heavy_bolt/lux(user.drop_location())
+	R.AddComponent(/datum/component/conjured_item)
+
+	if(user.STAPER > 10)
+		var/int_scaling = user.STAPER - 10
+		R.name = "lux bolt +[int_scaling]"//This doesn't do anything, just yet.
+	user.put_in_hands(R)
+	src.conjured_lux_bolt = R
+	addtimer(CALLBACK(src, PROC_REF(lux_punish), user), wait = 12 SECONDS)
+//For later. We'll have this multi-purpose eventually.
+/*
+	var/obj/item/ammo_casing/caseless/rogue/heavy_bolt/holy/silver = user.get_active_held_item()
+	if(istype(silver)
+		target.visible_message(span_notice("[user] places a palm around the [silver], leaving it awash with crimson."), \
+			span_userdanger("The bolt is suffused with my own spark. It shall strike harder than before..."))
+		qdel(silver)
+		user.blood_volume = max(user.blood_volume-300, 0)
+		user.handle_blood()
+		new /obj/effect/decal/cleanable/blood/puddle(user.loc)
+		user.apply_damage(50, BRUTE, spread_damage = TRUE)
+		return TRUE
+*/
+	return TRUE
+
+/obj/effect/proc_holder/spell/self/psydonic_lux_bolt/proc/lux_punish(mob/living/carbon/target)
+	target.visible_message(span_notice("[target] shimmers, as if they're to fade away entirely, before snapping back to reality."), \
+		span_userdanger("My own spark, my <b>lyfe</b>, flashes afore me. What have I done?"))
+	target.blood_volume = max(target.blood_volume-400, 0)//Take a guess.
+	target.handle_blood()
+	new /obj/effect/decal/cleanable/blood/puddle(target.loc)
+	target.apply_damage(300, BRUTE, spread_damage = TRUE)
+	playsound(target.loc, 'sound/magic/woundheal_crunch.ogg', 100, FALSE)
+
+/obj/effect/proc_holder/spell/self/psydonic_lux_bolt/Destroy()
+	if(src.conjured_lux_bolt)
+		conjured_lux_bolt.visible_message(span_warning("The [conjured_lux_bolt]'s borders begin to buckle and warp, before it disperses entirely!"))
+		qdel(conjured_lux_bolt)
+	return ..()
+
+/obj/item/ammo_casing/caseless/rogue/heavy_bolt/lux
+	name = "lux bolt"
+	desc = "A bolt, formed of pure, unfettered <b>lux</b>. Your own, likely, if you're holding this. \
+	Surely you can understand what's meant to be done?"
+	projectile_type = /obj/projectile/bullet/reusable/heavy_bolt/lux
+	icon_state = "lux_bolt"//Temp sprite. Psydon save me!!!
+	max_integrity = 0.1
+	force = 20
+	is_silver = TRUE//ARE YOU INSANE?
+
+//Don't miss, buddy.
+/obj/projectile/bullet/reusable/heavy_bolt/lux
+	name = "lux projectile"
+	damage = 10//We handle this by way of the on hit below.
+	damage_type = BURN//Maybe
+	armor_penetration = 100//+20 over standard. Doesn't really matter, though.
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/heavy_bolt/lux
+	hitsound = 'sound/combat/hits/hi_bolt (1).ogg'
+	speed = 0.3
+	npc_simple_damage_mult = 7
+	poisontype = /datum/reagent/water/blessed
+	poisonamount = 15
+	var/probably_not_friendly = MOB_UNDEAD
+
+/obj/projectile/bullet/reusable/heavy_bolt/lux/on_hit(target)
+	. = ..()
+	//Handle the mob impact, firstly.
+	if(ismob(target))
+		var/mob/living/M = target
+		if(M.mob_biotypes & probably_not_friendly)
+			M.adjust_fire_stacks(12, /datum/status_effect/fire_handler/fire_stacks/sunder)
+			M.ignite_mob()
+			visible_message(span_warning("[target] erupts in divine flames upon being struck by [src]!"))
+			M.apply_damage(50, BRUTE, spread_damage = TRUE)
+			M.apply_damage(50, BURN, spread_damage = TRUE)//Yeah, yeah, I know...
+		else
+			M.adjust_fire_stacks(12)
+			M.ignite_mob()
+			visible_message(span_warning("[target] is engulfed in flames upon being struck by [src]!"))
+			M.apply_damage(75, BRUTE, spread_damage = TRUE)
+			M.apply_damage(25, BURN, spread_damage = TRUE)//Again, I KNOW.
+	//Now, the rest. About 1:1 with artillery fireball.
+	var/turf/fallzone = get_turf(target)
+	if(!fallzone)
+		return
+	var/const/damage = 300
+	var/const/radius = 1
+	for(var/turf/open/visual in view(radius, fallzone))
+		var/obj/effect/temp_visual/luxturf/luxspread = new /obj/effect/temp_visual/luxturf(visual)
+		var/datum/effect_system/smoke_spread/S = new /datum/effect_system/smoke_spread/fast // SMOKE EFFECT
+		animate(luxspread, alpha = 255, time = 8)
+		S.set_up(radius, fallzone)
+		S.start()
+	// Everything from this point has to do with what is damaged, additional structures can be added to the list to have different damage/effects!
+	for(var/obj/structure/damaged in view(radius, fallzone))
+		if(!istype(damaged, /obj/structure/flora/newbranch))
+			damaged.take_damage(damage, BRUTE, "blunt", 1)
+	for(var/turf/closed/wall/damagedwalls in view(radius, fallzone))
+		damagedwalls.take_damage(damage, BRUTE, "blunt", 1)
+	qdel(src)
+
+/obj/effect/temp_visual/luxturf
+	icon_state = "emppulse"//Need a proper sprite for a lux burst.
+	duration = 8//Adjust with the above, when/if we get one. Otherwise just default to emp/pulse and just delete this.
