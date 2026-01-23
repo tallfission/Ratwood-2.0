@@ -158,7 +158,7 @@ export async function DreamMaker(
     );
     if (version == null) {
       Juke.logger.error(
-        `Unexpected DreamMaker return, ensure "${dmPath}" is correct DM path. Dreammaker returned ${execReturn.combined}`
+        `Unexpected DreamMaker return, ensure "${dmPath}" is correct DM path.`
       );
       throw new Juke.ExitCode(1);
     }
