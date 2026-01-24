@@ -169,8 +169,10 @@
 	body += "<br><br>"
 	body += "<A href='?_src_=holder;[HrefToken()];traitor=[REF(M)]'>Traitor panel</A> | "
 	body += "<A href='?_src_=holder;[HrefToken()];narrateto=[REF(M)]'>Narrate to</A> | "
-	body += "<A href='?_src_=holder;[HrefToken()];subtlemessage=[REF(M)]'>Subtle message</A> | "
+	body += "<A href='?_src_=holder;[HrefToken()];subtlemessage=[REF(M)]'>Subtle message</A>"
 	//body += "<A href='?_src_=holder;[HrefToken()];languagemenu=[REF(M)]'>Language Menu</A>"
+	body += "<br><A href='?_src_=holder;[HrefToken()];heal_panel=[REF(M)]'>Heal Panel</A> | "
+	body += "<A href='?_src_=holder;[HrefToken()];inventory_panel=[REF(M)]'>Inventory Panel</A>"
 
 	body += "</div>"
 
@@ -187,10 +189,10 @@
 	body += "<h3>Skills</h3><ul>"
 	for(var/skill_type in SSskills.all_skills)
 		var/datum/skill/skill = GetSkillRef(skill_type)
+		var/skill_level = 0
 		if(skill in M.skills?.known_skills)
-			body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill]] "
-		else
-			body += "<li>[initial(skill.name)]: 0"
+			skill_level = M.skills?.known_skills[skill]
+		body += "<li>[initial(skill.name)]: <a href='?_src_=holder;[HrefToken()];set_skill=[REF(M)];skill=[skill.type]'>[skill_level]</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];increase_skill=[REF(M)];skill=[skill.type]'>+</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];decrease_skill=[REF(M)];skill=[skill.type]'>-</a></li>"
 	body += "</ul></div>"
@@ -210,31 +212,31 @@
 	body += "<h3>Stats</h3><ul>"
 	if(isliving(M)) // Ensure M is a living mob
 		var/mob/living/living = M // Explicitly cast M to /mob/living
-		body += "<li>Strength: [living.STASTR] "
+		body += "<li>Strength: <a href='?_src_=holder;[HrefToken()];set_stat=[REF(M)];stat=strength'>[living.STASTR]</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=strength'>+</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=strength'>-</a></li>"
 
-		body += "<li>Perception: [living.STAPER] "
+		body += "<li>Perception: <a href='?_src_=holder;[HrefToken()];set_stat=[REF(M)];stat=perception'>[living.STAPER]</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=perception'>+</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=perception'>-</a></li>"
 
-		body += "<li>Willpower: [living.STAWIL] "
+		body += "<li>Willpower: <a href='?_src_=holder;[HrefToken()];set_stat=[REF(M)];stat=willpower'>[living.STAWIL]</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=willpower'>+</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=willpower'>-</a></li>"
 
-		body += "<li>Constitution: [living.STACON] "
+		body += "<li>Constitution: <a href='?_src_=holder;[HrefToken()];set_stat=[REF(M)];stat=constitution'>[living.STACON]</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=constitution'>+</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=constitution'>-</a></li>"
 
-		body += "<li>Intelligence: [living.STAINT] "
+		body += "<li>Intelligence: <a href='?_src_=holder;[HrefToken()];set_stat=[REF(M)];stat=intelligence'>[living.STAINT]</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=intelligence'>+</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=intelligence'>-</a></li>"
 
-		body += "<li>Speed: [living.STASPD] "
+		body += "<li>Speed: <a href='?_src_=holder;[HrefToken()];set_stat=[REF(M)];stat=speed'>[living.STASPD]</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=speed'>+</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=speed'>-</a></li>"
 
-		body += "<li>Luck: [living.STALUC] "
+		body += "<li>Luck: <a href='?_src_=holder;[HrefToken()];set_stat=[REF(M)];stat=fortune'>[living.STALUC]</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=fortune'>+</a> "
 		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=fortune'>-</a></li>"
 		body += "</ul>"

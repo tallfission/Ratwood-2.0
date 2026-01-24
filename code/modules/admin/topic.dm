@@ -26,6 +26,20 @@
 		if(mass_direct_handle_topic(href_list))
 			return
 
+	// Open Heal Panel from Player Panel
+	if(href_list["heal_panel"])
+		var/mob/living/M = locate(href_list["heal_panel"])
+		if(M)
+			show_heal_panel(M)
+		return
+
+	// Open Inventory Panel from Player Panel
+	if(href_list["inventory_panel"])
+		var/mob/living/M = locate(href_list["inventory_panel"])
+		if(M)
+			show_inventory_panel(M)
+		return
+
 	// Heal panel actions
 	if(href_list["heal_target"])
 		var/mob/living/M = locate(href_list["heal_target"])
@@ -1075,6 +1089,21 @@
 		log_admin("[usr] decreased [M]'s [initial(skill.name)] skill.")
 		show_player_panel_next(M, "skills")
 
+	else if(href_list["set_skill"])
+		var/mob/M = locate(href_list["set_skill"])
+		var/skill_path = text2path(href_list["skill"])
+		var/datum/skill/skill = GetSkillRef(skill_path)
+		var/current_level = M.get_skill_level(skill_path)
+		var/new_level = input(usr, "Set [skill.name] to (0-6):", "Set Skill", current_level) as num|null
+		if(new_level != null && M)
+			new_level = clamp(new_level, 0, 6)
+			var/difference = new_level - current_level
+			if(difference != 0)
+				M.adjust_skillrank(skill_path, difference, TRUE)
+				message_admins(span_danger("Admin [key_name_admin(usr)] set [key_name_admin(M)]'s [skill.name] to [new_level] (was [current_level])"))
+				log_admin("[usr] set [M]'s [skill.name] skill to [new_level] (was [current_level]).")
+			show_player_panel_next(M, "skills")
+
 	else if(href_list["add_language"])
 		var/mob/M = locate(href_list["add_language"])
 		var/datum/language/lang = text2path(href_list["language"])
@@ -1106,6 +1135,19 @@
 		M.change_stat(statkey, -1)
 		log_admin("[usr] decreased [M]'s [statkey].")
 		show_player_panel_next(M, "stats")
+
+	else if(href_list["set_stat"])
+		var/mob/living/M = locate(href_list["set_stat"])
+		var/statkey = href_list["stat"]
+		var/current_value = M.get_stat(statkey)
+		var/new_value = input(usr, "Set [statkey] to:", "Set Stat", current_value) as num|null
+		if(new_value != null && M)
+			var/difference = new_value - current_value
+			if(difference != 0)
+				M.change_stat(statkey, difference)
+				message_admins(span_danger("Admin [key_name_admin(usr)] set [key_name_admin(M)]'s [statkey] to [new_value] (was [current_value])"))
+				log_admin("[usr] set [M]'s [statkey] to [new_value] (was [current_value]).")
+			show_player_panel_next(M, "stats")
 
 	else if(href_list["set_patron"])
 		if(!check_rights(R_ADMIN))
