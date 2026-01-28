@@ -56,6 +56,7 @@
 	beltl = /obj/item/rogueweapon/scabbard/sword
 	beltr = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
+		/obj/item/storage/belt/rogue/pouch/coins/rich = 1,
 		/obj/item/rogueweapon/huntingknife/idagger = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
 		/obj/item/paper/scroll/writ_of_esteem/grenzel = 1,
