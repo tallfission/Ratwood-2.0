@@ -14,13 +14,13 @@
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/rogue/dirt)
 	excluded_turfs = list(/turf/open/floor/rogue/dirt/road)
-	spawnableTurfs = list(/turf/open/floor/rogue/dirt/nospawn = 40)
+	spawnableTurfs = list(/turf/open/floor/rogue/dirt/nospawn = 50)
 	allowed_areas = list(/area/rogue/outdoors/bograt)
 
 /datum/mapGeneratorModule/bogratnospawnsgrass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/rogue/grass)
-	spawnableTurfs = list(/turf/open/floor/rogue/grass/nospawn = 40)
+	spawnableTurfs = list(/turf/open/floor/rogue/grass/nospawn = 50)
 	allowed_areas = list(/area/rogue/outdoors/bograt)
 
 /datum/mapGeneratorModule/bograt
@@ -41,13 +41,13 @@
 							/obj/structure/flora/ausbushes/ywflowers = 0.3,
 							/obj/item/natural/stone = 3,
 							/obj/item/natural/rock = 3,
-							/obj/item/magic/artifact = 0.5,
+							/obj/item/magic/artifact = 0.3,
 							/obj/structure/leyline = 0.2,
 							/obj/structure/voidstoneobelisk = 0.3,
 							/obj/structure/flora/roguegrass/herb/manabloom = 0.3,
 							/obj/item/magic/manacrystal = 0.3,
-							/obj/structure/closet/dirthole/closed/loot = 1.5,
-							/obj/structure/flora/roguegrass/swampweed = 1.2,
+							/obj/structure/closet/dirthole/closed/loot = 1.3,
+							/obj/structure/flora/roguegrass/swampweed = 1,
 							/obj/structure/flora/roguegrass/herb/random = 4,
 							/obj/structure/flora/rogueshroom = 1,
 							/obj/effect/decal/remains/bear = 0.5,
@@ -112,4 +112,4 @@
 							/obj/structure/flora/roguetree = 10,
 							/obj/structure/flora/ausbushes/reedbush = 20,
 							/obj/structure/flora/roguegrass/water/reeds = 20,
-							/obj/structure/zizo_bane = 3)
+							/obj/structure/zizo_bane = 2)
