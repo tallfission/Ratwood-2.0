@@ -32,8 +32,8 @@
 		ui = new(user, src, "ExaminePanel")
 		ui.open()
 
-/datum/examine_panel/ui_data(mob/user)
-
+// Where MOST of the examine panel data lives because it don't update mid game
+/datum/examine_panel/ui_static_data(mob/user)
 	var/flavor_text
 	var/flavor_text_nsfw
 	var/obscured
@@ -53,10 +53,10 @@
 		if(!(holder.wear_armor && holder.wear_armor.flags_inv) && !(holder.wear_shirt && holder.wear_shirt.flags_inv) && !(holder_human.underwear))
 			is_naked = TRUE
 		obscured = ((!isobserver(user)) && !holder_human.client?.prefs?.masked_examine) && ((holder_human.wear_mask && (holder_human.wear_mask.flags_inv & HIDEFACE)) || (holder_human.head && (holder_human.head.flags_inv & HIDEFACE)))
-		flavor_text = obscured ? "Obscured" : holder.flavortext
-		flavor_text_nsfw = obscured ? "Obscured" : holder.nsfwflavortext
-		ooc_notes += holder.ooc_notes
-		ooc_notes_nsfw += holder.erpprefs
+		flavor_text = obscured ? "Obscured" : holder.flavortext_cached
+		flavor_text_nsfw = obscured ? "Obscured" : holder.nsfwflavortext_cached
+		ooc_notes += holder.ooc_notes_cached
+		ooc_notes_nsfw += holder.erpprefs_cached
 		char_name = holder.name
 		song_url = holder.ooc_extra
 		is_vet = holder.check_agevet()
@@ -87,15 +87,6 @@
 	if(song_url)
 		has_song = TRUE
 
-	ooc_notes = html_encode(ooc_notes)
-	ooc_notes = parsemarkdown_basic(ooc_notes, hyperlink=TRUE)
-	ooc_notes_nsfw = html_encode(ooc_notes_nsfw)
-	ooc_notes_nsfw = parsemarkdown_basic(ooc_notes_nsfw, hyperlink=TRUE)
-	flavor_text = html_encode(flavor_text)
-	flavor_text = parsemarkdown_basic(flavor_text, hyperlink=TRUE)
-	flavor_text_nsfw = html_encode(flavor_text_nsfw)
-	flavor_text_nsfw = parsemarkdown_basic(flavor_text_nsfw, hyperlink=TRUE)
-
 	var/list/data = list(
 		// Identity
 		"character_name" = obscured ? "Unknown" : char_name,
@@ -113,6 +104,12 @@
 		"has_song" = has_song,
 		"is_vet" = is_vet,
 		"is_naked" = is_naked,
+	)
+	return data
+
+/datum/examine_panel/ui_data(mob/user)
+	var/list/data = list(
+		"is_playing" = is_playing,
 	)
 	return data
 
