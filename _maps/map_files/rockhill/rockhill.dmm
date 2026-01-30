@@ -44338,6 +44338,7 @@
 /area/rogue/indoors/town/church)
 "nAq" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
+/obj/item/grown/log/tree/small,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/under/town/basement/tavern)
 "nAr" = (
@@ -47214,6 +47215,10 @@
 	dir = 4
 	},
 /area/rogue/outdoors/rtfield/rockhill/above)
+"otE" = (
+/obj/structure/fermentation_keg/distiller,
+/turf/open/floor/rogue/concrete,
+/area/rogue/under/town/basement/tavern)
 "otP" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/rogue/cobble/mossy,
@@ -57327,6 +57332,10 @@
 	icon_state = "horzw"
 	},
 /area/rogue/under/cavewet)
+"rCO" = (
+/obj/item/grown/log/tree/small,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/under/town/basement/tavern)
 "rDh" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -72472,10 +72481,6 @@
 "wpJ" = (
 /turf/closed/wall/mineral/rogue/stone/window/blue_moss,
 /area/rogue/under/cavewet/wizarddungeon)
-"wpX" = (
-/obj/structure/fermentation_keg/distiller,
-/turf/open/floor/rogue/concrete,
-/area/rogue/under/town/basement/tavern)
 "wqa" = (
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/woodsrat/above)
@@ -136233,12 +136238,12 @@ whb
 whb
 whb
 xeg
-wpX
+otE
 sFx
 sFx
 tCN
 sFx
-sFx
+rCO
 sFx
 xeg
 lke
@@ -136666,7 +136671,7 @@ whb
 whb
 xeg
 fFA
-sFx
+rCO
 sFx
 vQS
 sFx
