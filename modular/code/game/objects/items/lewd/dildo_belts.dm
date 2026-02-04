@@ -50,5 +50,5 @@
 		var/matrix/M = new
 		M.Scale(-0.8,-0.8)
 		attached_toy.transform = M
-		attached_toy.pixel_y = -5
+		attached_toy.pixel_y = -6
 		attached_toy.vis_flags = VIS_INHERIT_ID | VIS_INHERIT_LAYER | VIS_INHERIT_PLANE
