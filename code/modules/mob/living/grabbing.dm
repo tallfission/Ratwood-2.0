@@ -439,8 +439,7 @@
 	C.next_attack_msg.Cut()
 	if(isdoll(C)) 
 		armor_block = C.getarmor(sublimb_grabbed, "blunt")
-		if(armor_block < 1)
-		else
+		if(armor_block > 1)
 			C.apply_damage(damage, BRUTE, limb_grabbed, armor_block)
 	else 
 		armor_block = C.run_armor_check(limb_grabbed, "slash")

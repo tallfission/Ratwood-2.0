@@ -66,6 +66,8 @@
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach/construct,
 		)
 	customizers = list(
+		/datum/customizer/organ/eyes/humanoid
+		/datum/customizer/bodypart_feature/hair/head/humanoid
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/bodypart_feature/underwear,
