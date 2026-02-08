@@ -11,7 +11,7 @@
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	subclass_languages = list(/datum/language/gronnic)
 	subclass_stats = list(
-		STATKEY_END = 3, //People see big numbers and start shitting their pants, but their weighted stats are 7. This is fine. 
+		STATKEY_WIL = 3, //People see big numbers and start shitting their pants, but their weighted stats are 7. This is fine. 
 		STATKEY_STR = 3, //TO WIELD THE MAUL. THEY CAN'T USE ANY OTHER WEAPON TYPE BUT MACES ANYWAY.
 		STATKEY_INT = 2,
 		STATKEY_CON = 3,
