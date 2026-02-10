@@ -200,6 +200,12 @@
 	/obj/item/reagent_containers/glass/bottle/alchemical,/obj/item/reagent_containers/glass/bottle/alchemical,/obj/item/reagent_containers/glass/bottle/alchemical,
 	/obj/item/reagent_containers/glass/bottle/alchemical,/obj/item/reagent_containers/glass/bottle/alchemical,/obj/item/reagent_containers/glass/bottle/alchemical)
 
+/datum/supply_pack/rogue/tools/alch_bottlesnormal
+	name = "Bulk Bottles" //
+	cost = 20
+	contains = list(/obj/item/reagent_containers/glass/bottle/,/obj/item/reagent_containers/glass/bottle/,/obj/item/reagent_containers/glass/bottle/,
+	/obj/item/reagent_containers/glass/bottle/,/obj/item/reagent_containers/glass/bottle/,/obj/item/reagent_containers/glass/bottle/,)
+
 /datum/supply_pack/rogue/tools/gwstrap
 	name = "Greatweapon Strap"
 	cost = 30
