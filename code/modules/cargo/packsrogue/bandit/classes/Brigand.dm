@@ -418,6 +418,21 @@
 	cost = 70
 	contains = list(/obj/item/rogueweapon/estoc)
 
+/datum/supply_pack/rogue/Brigand/javelinsteel
+	name = "Steel Javelin Bag"
+	cost = 40 
+	contains = list(/obj/item/quiver/javelin/steel)
+
+/datum/supply_pack/rogue/Brigand/sjavelin
+	name = "Single Steel Javelin"
+	cost = 10
+	contains = list(/obj/item/ammo_casing/caseless/rogue/javelin/steel)
+
+/datum/supply_pack/rogue/Brigand/silverjavelin
+	name = "Single Silver Javelin"
+	cost = 30
+	contains = list(/obj/item/ammo_casing/caseless/rogue/javelin/silver)
+
 /////////////
 // SHIELDS //
 /////////////

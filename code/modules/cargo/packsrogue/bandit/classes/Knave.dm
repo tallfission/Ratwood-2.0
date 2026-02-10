@@ -37,6 +37,11 @@
 	cost = 30
 	contains = list(/obj/item/clothing/neck/roguetown/chaincoif)
 
+/datum/supply_pack/rogue/Knave/coif/hpcoif
+	name = "Heavy Padded Coif"
+	cost = 35
+	contains = list(/obj/item/clothing/neck/roguetown/coif/heavypadding)
+
 ///////////
 // CHEST //
 ///////////
@@ -177,9 +182,14 @@
 	cost = 20
 	contains = list(/obj/item/storage/belt/rogue/leather/knifebelt/black/steel)
 
+/datum/supply_pack/rogue/Knave/steeltossblade
+	name = "Single Steel Tossblade"
+	cost = 5
+	contains = list(/obj/item/rogueweapon/huntingknife/throwingknife/steel)
+
 /datum/supply_pack/rogue/Knave/silvertossblade
-	name = "Silver Tossblade"
-	cost = 10
+	name = "Single Silver Tossblade"
+	cost = 25 // Because I can imagine how annoying these would be. 
 	contains = list(/obj/item/rogueweapon/huntingknife/throwingknife/silver)
 
 /////////////////////////////

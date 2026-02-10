@@ -5,6 +5,15 @@
 	crate_type = /obj/structure/closet/crate/chest/merchant
 
 /////////////
+// MEDICAL //
+/////////////
+
+/datum/supply_pack/rogue/Medicaments/bandages
+	name = "Roll of bandages"
+	cost = 10
+	contains = list(/obj/item/natural/bundle/cloth/bandage/full)
+
+/////////////
 // POTIONS //
 /////////////
 

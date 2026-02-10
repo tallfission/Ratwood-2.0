@@ -13,6 +13,11 @@
 	cost = 2
 	contains = list(/obj/item/natural/cloth)
 
+/datum/supply_pack/rogue/Supplies/rope
+	name = "Rope"
+	cost = 5
+	contains = list(/obj/item/rope)
+
 /datum/supply_pack/rogue/Supplies/chain
 	name = "Chain"
 	cost = 5
@@ -58,6 +63,21 @@
 	cost = 5
 	contains = list(/obj/item/flashlight/flare/torch/lantern)
 
+/datum/supply_pack/rogue/Supplies/gwstrap
+	name = "Greatweapon Strap"
+	cost = 15
+	contains = list(/obj/item/rogueweapon/scabbard/gwstrap)
+
+/datum/supply_pack/rogue/Supplies/scabbard
+	name = "Sword Scabbard"
+	cost = 10
+	contains = list(/obj/item/rogueweapon/scabbard/sword)
+
+/datum/supply_pack/rogue/Supplies/sheath
+	name = "Dagger Sheath"
+	cost = 5
+	contains = list(/obj/item/rogueweapon/scabbard/sheath)
+
 /datum/supply_pack/rogue/Supplies/hknife
 	name = "Hunting Knife"
 	cost = 5
@@ -83,20 +103,15 @@
 	cost = 10
 	contains = list(/obj/item/reagent_containers/glass/bottle/waterskin)
 
-/datum/supply_pack/rogue/Supplies/gwstrap
-	name = "Greatweapon Strap"
-	cost = 15
-	contains = list(/obj/item/rogueweapon/scabbard/gwstrap)
-
-/datum/supply_pack/rogue/Supplies/scabbard
-	name = "Sword Scabbard"
-	cost = 10
-	contains = list(/obj/item/rogueweapon/scabbard/sword)
-
-/datum/supply_pack/rogue/Supplies/sheath
-	name = "Dagger Sheath"
+/datum/supply_pack/rogue/Supplies/flint
+	name = "Flint"
 	cost = 5
-	contains = list(/obj/item/rogueweapon/scabbard/sheath)
+	contains = list(/obj/item/flint)
+
+/datum/supply_pack/rogue/Supplies/bedroll
+	name = "Bedroll"
+	cost = 5
+	contains = list(/obj/item/bedroll)
 
 /datum/supply_pack/rogue/Supplies/soap
 	name = "Bar of Soap"
