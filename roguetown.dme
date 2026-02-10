@@ -2144,6 +2144,7 @@
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\roguetown_species.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\construct\_construct.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\construct\constructm.dm"
+#include "code\modules\mob\living\carbon\human\species_types\roguetown\construct\doll.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\dullahan\dullahan.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\dullahan\dullahan_head.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\dullahan\dullahan_vision.dm"
