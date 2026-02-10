@@ -32,6 +32,7 @@
 	heavyfootstep = null
 	landsound = 'sound/foley/jumpland/waterland.wav'
 	neighborlay_override = "edge"
+	reflection_type = REFLECTION_WATER
 	var/water_color = "#6a9295"
 	var/water_reagent = /datum/reagent/water
 	var/water_reagent_purified = /datum/reagent/water // If put through a water filtration device, provides this reagent instead

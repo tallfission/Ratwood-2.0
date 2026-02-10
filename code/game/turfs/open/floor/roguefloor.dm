@@ -1001,6 +1001,7 @@
 						/turf/open/floor/rogue/snowpatchy,
 						/turf/open/floor/rogue/snow,
 						/turf/open/floor/rogue/snowrough,)
+	reflection_type = REFLECTION_SHINY
 
 /turf/open/floor/rogue/churchmarble/cardinal_smooth(adjacencies)
 	roguesmooth(adjacencies)
