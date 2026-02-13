@@ -1142,6 +1142,9 @@
 			M.buckled.unbuckle_mob(M, TRUE)
 		do_teleport(M, end_spot, channel = TELEPORT_CHANNEL_MAGIC)
 
+	for(var/obj/item/I in start_spot.contents)
+		I.forceMove(end_spot)
+
 /datum/spell_command/crush
 	word = "pondus"
 	fatiguecost = 20
