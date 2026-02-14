@@ -243,13 +243,18 @@
 	if(!get_location_accessible(target, user.zone_selected))
 		to_chat(user, span_warning("There is clothes obsecuring the [lowertext(parse_zone(user.zone_selected))]."))
 		return TRUE
-	var/obj/item/bodypart/branding_part = target.get_bodypart(check_zone(user.zone_selected))
+	var/check_zone = check_zone(user.zone_selected)
+	var/obj/item/bodypart/branding_part = target.get_bodypart(check_zone)
 	if(!branding_part) //missing limb
 		to_chat(user, span_warning("Unfortunately, there's nothing there."))
 		return TRUE
 
 	if(user.zone_selected == BODY_ZONE_PRECISE_GROIN) // if targeting the groin, handle marking buttocks and genitals instead of a single chest zone
-		if(alert("Brand their buttocks?",,"Yes", "No") == "Yes")
+		var/answer = tgui_alert(user, "What do you wish to brand?", "Please answer in [DisplayTimeText(100)]!", list("Buttocks", "Loins", "Cancel"), 100)
+		if(!answer || answer == "Cancel")
+			to_chat(user, span_warning("I pull the iron away."))
+			return TRUE
+		if(answer == "Buttocks")
 			var/obj/item/bodypart/chest/buttocks = branding_part
 			if(QDELETED(buttocks) || !user.Adjacent(target) || !istype(buttocks)) // body part no longer exists/moved away
 				return TRUE
@@ -261,60 +266,80 @@
 			var/obj/item/organ/penis/penis = target.getorganslot(ORGAN_SLOT_PENIS)
 			var/obj/item/organ/vagina/vagina = target.getorganslot(ORGAN_SLOT_VAGINA)
 			var/obj/item/organ/testicles/testes = target.getorganslot(ORGAN_SLOT_TESTICLES)
-			if((penis && penis.visible_organ || vagina && vagina.visible_organ || testes && testes.visible_organ) && (alert("Brand their genitals?",, "Yes", "No") == "Yes"))
-				var/which_genitals = ""
-				if(penis && penis.visible_organ && alert("Brand their penis?",,"Yes", "No") == "Yes")
+			var/list/available_loins = list()
+			if(penis && penis.is_visible())
+				available_loins += "Cock"
+			if(vagina && vagina.is_visible())
+				available_loins += "Cunt"
+			if(testes && testes.is_visible())
+				available_loins += "Bollocks"
+			if(length(available_loins) < 1)
+				to_chat(user, span_warning("I can't see any loins worthy of my branding."))
+				return TRUE
+			available_loins += "Cancel"
+			answer = tgui_alert(user, "What do you wish to brand?", "Please answer in [DisplayTimeText(100)]!", available_loins, 100)
+			if(!answer || answer == "Cancel")
+				to_chat(user, span_warning("I pull the iron away."))
+				return TRUE
+			switch(answer)
+				if("Cock")
 					if(QDELETED(penis) || !user.Adjacent(target)) // body part no longer exists/moved away
 						return TRUE
 					if(length(penis.branded_writing))
 						to_chat(user, span_warning("I reburn over the existing marking."))
 					penis.branded_writing = setbranding
-					which_genitals = "cock"
-				else if(vagina && vagina.visible_organ && alert("Brand their pussy?",,"Yes", "No") == "Yes")
+				if("Cunt")
 					if(QDELETED(vagina) || !user.Adjacent(target)) // body part no longer exists/moved away
 						return TRUE
 					if(length(vagina.branded_writing))
 						to_chat(user, span_warning("I reburn over the existing marking."))
 					vagina.branded_writing = setbranding
-					which_genitals = "pussy"
-				else if(testes && testes.visible_organ && alert("Brand their balls?",,"Yes", "No") == "Yes")
+				if("Bollocks")
 					if(QDELETED(testes) || !user.Adjacent(target)) // body part no longer exists/moved away
 						return TRUE
 					if(length(testes.branded_writing))
 						to_chat(user, span_warning("I reburn over the existing marking."))
 					testes.branded_writing = setbranding
-					which_genitals = "balls"
-				else
-					to_chat(user, span_warning("I pull the iron away."))
-					return TRUE
-				user.visible_message(span_info("[target] writhes as \the [src] sears onto their [which_genitals]! The fresh brand reads \"[setbranding]\"."))
-			else
-				to_chat(user, span_warning("I pull the iron away."))
-				return TRUE
+			user.visible_message(span_info("[target] writhes as \the [src] sears onto their [lowertext(answer)]! The fresh brand reads \"[setbranding]\"."))
 		if(!QDELETED(branding_part) && istype(branding_part)) // if targeted body part still exists, apply damage
 			target.apply_damage(10, BURN, branding_part)
 		target.Knockdown(10)
 		to_chat(target, span_userdanger("You have been branded!"))
-	else if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH && alert("Burn their mouth?",,"Yes", "No") == "Yes")
-		if(QDELETED(branding_part) || !istype(branding_part) || !user.Adjacent(target)) // body part no longer exists/moved away
+	else if(check_zone == BODY_ZONE_HEAD) // targeting head
+		var/answer = tgui_alert(user, "What do you wish to brand?", "Please answer in [DisplayTimeText(100)]!", list("Head", "Mouth", "Neck", "Cancel"), 100)
+		if(!answer || answer == "Cancel")
+			to_chat(user, span_warning("I pull the iron away."))
 			return TRUE
-		user.visible_message(span_info("[target] writhes as \the [src] sears onto their lips! The branding leaves an unrecognizable symbol."))
-		target.apply_status_effect(/datum/status_effect/mouth_branded)
-		target.apply_damage(20, BURN, branding_part)
-		target.Knockdown(20)
-		to_chat(target, span_userdanger("Your mouth has been seared!"))
-	else if(user.zone_selected == BODY_ZONE_PRECISE_NECK || user.zone_selected == BODY_ZONE_HEAD && alert("Brand their neck?",,"Yes", "No") == "Yes") // if targeting the head, ask to brand their neck, otherwise fallback to genetic body zone part
-		var/obj/item/bodypart/head/neck = branding_part
-		if(QDELETED(neck) || !istype(neck) || !user.Adjacent(target)) // body part no longer exists/moved away
-			return TRUE
-		if(length(neck.branded_writing_on_neck))
-			to_chat(user, span_warning("I reburn over the existing marking."))
-		user.visible_message(span_info("[target] writhes as \the [src] sears onto their neck! The fresh brand reads \"[setbranding]\"."))
-		neck.branded_writing_on_neck = setbranding
-		target.apply_damage(20, BURN, neck)
-		target.Knockdown(10)
-		to_chat(target, span_userdanger("You have been branded!"))
-	else if (alert("Brand their [branding_part.name]?",,"Yes", "No") == "Yes") // generic body part
+		switch(answer)
+			if("Mouth")
+				if(QDELETED(branding_part) || !istype(branding_part) || !user.Adjacent(target)) // body part no longer exists/moved away
+					return TRUE
+				user.visible_message(span_info("[target] writhes as \the [src] sears onto their lips! The branding leaves an unrecognizable symbol."))
+				target.apply_status_effect(/datum/status_effect/mouth_branded)
+				target.apply_damage(20, BURN, branding_part)
+				target.Knockdown(20)
+				to_chat(target, span_userdanger("Your mouth has been seared!"))
+			if("Neck")
+				var/obj/item/bodypart/head/neck = branding_part
+				if(QDELETED(neck) || !istype(neck) || !user.Adjacent(target)) // body part no longer exists/moved away
+					return TRUE
+				if(length(neck.branded_writing_on_neck))
+					to_chat(user, span_warning("I reburn over the existing marking."))
+				user.visible_message(span_info("[target] writhes as \the [src] sears onto their neck! The fresh brand reads \"[setbranding]\"."))
+				neck.branded_writing_on_neck = setbranding
+				target.apply_damage(20, BURN, neck)
+				target.Knockdown(10)
+				to_chat(target, span_userdanger("You have been branded!"))
+			if("Head")
+				if(QDELETED(branding_part) || !istype(branding_part) || !user.Adjacent(target)) // body part no longer exists/moved away
+					return TRUE
+				if(length(branding_part.branded_writing))
+					to_chat(user, span_warning("I reburn over the existing marking."))
+				user.visible_message(span_info("[target] writhes as \the [src] sears onto their [branding_part.name]! The fresh brand reads \"[setbranding]\"."))
+				branding_part.branded_writing = setbranding
+				target.apply_damage(20, BURN, branding_part)
+				to_chat(target, span_userdanger("You have been branded!"))
+	else if (tgui_alert(user, "Brand their [branding_part.name]?", "Please answer in [DisplayTimeText(100)]!", list("Yes", "No"), 100) == "Yes") // generic body part
 		if(QDELETED(branding_part) || !istype(branding_part) || !user.Adjacent(target)) // body part no longer exists/moved away
 			return TRUE
 		if(length(branding_part.branded_writing))
