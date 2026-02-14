@@ -247,7 +247,7 @@
 				continue
 			if(R.structurecraft && istype(S, R.structurecraft))
 				continue
-			if(S.density)
+			if(S.density && !R.ignoredensity)
 				to_chat(user, span_warning("Something is in the way."))
 				return
 		for(var/obj/machinery/M in T)
@@ -536,8 +536,8 @@
 			continue
 		var/category
 		if(R.skillcraft)
-			var/datum/skill/S = new R.skillcraft()
-			category = S.name
+			var/datum/skill/S = R.skillcraft
+			category = initial(S.name)
 		else
 			category = "Other"
 		if(isnull(crafting_recipes[category]))

@@ -62,7 +62,9 @@
 	var/effective_range_type = EFF_RANGE_NONE
 	/// Extra sharpness drain per successful & parried hit.
 	var/sharpness_penalty = 0
-
+	//The below is for chipping on intents. Damage applied through armour, as a mechanic.
+	var/blunt_chipping = FALSE//Is this even capable of it?
+	var/blunt_chip_strength = null//How strong?
 
 	var/list/static/bonk_animation_types = list(
 		BCLASS_BLUNT,
@@ -150,6 +152,18 @@
 		inspec += "\nThis intent deals [percstr]% [intent_intdamage_factor > 1 ? "more" : "less"] damage to integrity."
 	if(sharpness_penalty)
 		inspec += "\nThis intent will cost some sharpness for every attack made."
+	if(blunt_chipping)
+		var/chip_strength
+		switch(blunt_chip_strength)
+			if(BLUNT_CHIP_MINUSCULE)
+				chip_strength = "minuscule"
+			if(BLUNT_CHIP_WEAK)
+				chip_strength = "middling"
+			if(BLUNT_CHIP_STRONG)
+				chip_strength = "considerable"
+			if(BLUNT_CHIP_ABSURD)
+				chip_strength = "significant"
+		inspec += "\nA [chip_strength] sum of damage will bypass armour, if the target has no padded protection."
 	inspec += "<br>----------------------"
 
 	to_chat(user, "[inspec.Join()]")
@@ -242,7 +256,7 @@
 		chargedloop.start(chargedloop.parent)
 		mastermob.curplaying = src
 	if(glow_color && glow_intensity)
-		mob_light = mastermob.mob_light(glow_color, glow_intensity)
+		mob_light = mastermob.mob_light(glow_color, glow_intensity, FLASH_LIGHT_SPELLGLOW)
 	if(mob_charge_effect)
 		mastermob.vis_contents += mob_charge_effect
 

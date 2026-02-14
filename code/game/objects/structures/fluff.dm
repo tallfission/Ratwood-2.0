@@ -811,7 +811,7 @@
 			can_write = TRUE
 		if(istype(W, /obj/item/rogueore/coal))
 			can_write = TRUE
-		
+
 		if(can_write)
 			if(wrotesign)
 				to_chat(user, span_warning("Something is already carved here."))
@@ -1103,8 +1103,6 @@
 		/obj/item/rogueweapon/sword/long/judgement, // various unique weapons around from a few roles follows. Don't lose your fancy toys....
 		/obj/item/rogueweapon/sword/long/oathkeeper,
 		/obj/item/rogueweapon/woodstaff/riddle_of_steel/magos, //bit dumb for a bandit mage to toss this toy away but whatever
-		/obj/item/rogueweapon/halberd/psyhalberd, // relic weapons but not standard Inquisition stuff
-		/obj/item/rogueweapon/greatsword/psygsword,
 		/obj/item/clothing/head/roguetown/circlet,
 		/obj/item/carvedgem,  //Some of these aren't particularly worth much, but it'd be REALLY unintuitive for "valuables" to not actually be offerings
 		/obj/item/rogueweapon/huntingknife/stoneknife/kukri,
@@ -1257,7 +1255,7 @@
 
 /obj/structure/fluff/psycross/attackby(obj/item/W, mob/living/carbon/human/user, params)
 	if(user.mind)
-		if((user.mind.assigned_role == "Bishop") || ((user.mind.assigned_role == "Acolyte") && (user.patron.type == /datum/patron/divine/eora)))
+		if((user.mind.assigned_role == "Bishop") || (user.mind.assigned_role == "Acolyte"))
 			if(istype(W, /obj/item/reagent_containers/food/snacks/grown/apple))
 				if(!istype(get_area(user), /area/rogue/indoors/town/church/chapel))
 					to_chat(user, span_warning("I need to do this in the chapel."))
@@ -1301,17 +1299,27 @@
 							var/surname = input(user, "Enter a surname for the couple:", "Marriage Ceremony") as text|null
 							if(!surname || !length(trim(surname)))
 								surname = thegroom.dna.species.random_surname()
+							priority_announce("[thegroom.real_name] has married [thebride.real_name]!", title = "Holy Union!", sound = 'sound/misc/bell.ogg')
+							var/list/titles = list("Sir", "Ser", "Dame", "Lord", "Lady", "Knight-Captain", "Duke", "Duchess", "Father", "Mother", "Brother", "Sister", "Prelate", "Devotee", "Votary")
 							// Assign surname to groom
 							var/list/groom_name_parts = splittext(thegroom.real_name, " ")
-							var/groom_first_name = groom_name_parts[1]
-							thegroom.real_name = "[groom_first_name] [surname]"
+							var/title_found = (titles.Find(groom_name_parts[1]) != 0)
+							if(title_found)
+								thegroom.real_name = "[groom_name_parts[1]] [groom_name_parts[2]] [surname]"
+							else
+								thegroom.real_name = "[groom_name_parts[1]] [surname]"
 							// Assign surname to bride
 							var/list/bride_name_parts = splittext(thebride.real_name, " ")
-							var/bride_first_name = bride_name_parts[1]
-							thebride.real_name = "[bride_first_name] [surname]"
+							title_found = (titles.Find(bride_name_parts[1]) != 0)
+							if(title_found)
+								thebride.real_name = "[bride_name_parts[1]] [bride_name_parts[2]] [surname]"
+							else
+								thebride.real_name = "[bride_name_parts[1]] [surname]"
 							// Private notification to both
-							if(thegroom) to_chat(thegroom, span_notice("Your new shared surname is [surname]."))
-							if(thebride) to_chat(thebride, span_notice("Your new shared surname is [surname]."))
+							if(thegroom) 
+								to_chat(thegroom, span_notice("Your new shared surname is [surname]."))
+							if(thebride) 
+								to_chat(thebride, span_notice("Your new shared surname is [surname]."))
 							// Set marriedto fields
 							thegroom.marriedto = thebride.real_name
 							thebride.marriedto = thegroom.real_name
@@ -1319,9 +1327,7 @@
 							thebride.adjust_triumphs(1)
 							// After surname is set, have the priest say the wedding line
 							if(user && surname)
-								var/surname_trimmed = copytext(surname, 2) // Remove leading space if present
-								user.say("I hereby wed you [surname_trimmed]s.")
-							priority_announce("[thegroom.real_name] has married [thebride.real_name]!", title = "Holy Union!", sound = 'sound/misc/bell.ogg')
+								user.say("I hereby wed you as [surname]s.")
 							qdel(A)
 							marriage = TRUE
 						else
