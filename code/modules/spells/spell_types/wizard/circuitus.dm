@@ -1430,7 +1430,7 @@
 /datum/spell_command/buff_constitution
 	word = "saxum"
 	fatiguecost = 20
-	needs_spell = /obj/effect/proc_holder/spell/invoked/fortitude
+	needs_spell = /obj/effect/proc_holder/spell/invoked/stoneskin
 
 /datum/spell_command/buff_constitution/do_spell(datum/incantation_data/data)
 	if(!data.current_iota || data.current_iota.what_am_i != "mob")
@@ -1686,7 +1686,7 @@ GLOBAL_LIST_INIT(spell_command_list, list(
 /datum/status_effect/buff/circuitus_strength
 	id = "circuitus_strength"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/circuitus_strength
-	duration = 30 SECONDS
+	duration = 20 SECONDS
 
 /datum/status_effect/buff/circuitus_strength/on_creation(mob/living/new_owner, bonus = 1)
 	effectedstats = list(STATKEY_STR = bonus)
@@ -1700,7 +1700,7 @@ GLOBAL_LIST_INIT(spell_command_list, list(
 /datum/status_effect/buff/circuitus_constitution
 	id = "circuitus_constitution"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/circuitus_constitution
-	duration = 30 SECONDS
+	duration = 20 SECONDS
 
 /datum/status_effect/buff/circuitus_constitution/on_creation(mob/living/new_owner, bonus = 1)
 	effectedstats = list(STATKEY_CON = bonus)
@@ -1714,7 +1714,7 @@ GLOBAL_LIST_INIT(spell_command_list, list(
 /datum/status_effect/buff/circuitus_speed
 	id = "circuitus_speed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/circuitus_speed
-	duration = 30 SECONDS
+	duration = 20 SECONDS
 
 /datum/status_effect/buff/circuitus_speed/on_creation(mob/living/new_owner, bonus = 1)
 	effectedstats = list(STATKEY_SPD = bonus)
@@ -1728,7 +1728,7 @@ GLOBAL_LIST_INIT(spell_command_list, list(
 /datum/status_effect/buff/circuitus_perception
 	id = "circuitus_perception"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/circuitus_perception
-	duration = 30 SECONDS
+	duration = 20 SECONDS
 
 /datum/status_effect/buff/circuitus_perception/on_creation(mob/living/new_owner, bonus = 1)
 	effectedstats = list(STATKEY_PER = bonus)
@@ -1742,7 +1742,7 @@ GLOBAL_LIST_INIT(spell_command_list, list(
 /datum/status_effect/buff/circuitus_endurance
 	id = "circuitus_endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/circuitus_endurance
-	duration = 30 SECONDS
+	duration = 20 SECONDS
 
 /datum/status_effect/buff/circuitus_endurance/on_creation(mob/living/new_owner, bonus = 1)
 	effectedstats = list(STATKEY_END = bonus)

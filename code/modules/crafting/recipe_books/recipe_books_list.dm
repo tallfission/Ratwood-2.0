@@ -194,4 +194,9 @@
 		/datum/book_entry/obmolior,
 		/datum/book_entry/recolligere,
 		/datum/book_entry/murus,
+		/datum/book_entry/vis,
+		/datum/book_entry/saxum,
+		/datum/book_entry/festinatio,
+		/datum/book_entry/oculi,
+		/datum/book_entry/tenax,
 		)

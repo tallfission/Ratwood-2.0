@@ -657,3 +657,83 @@
 	This spell command receives a coordinate. An arcyne wall of force is created at the specified coordinate.
 	</div>
 	"}
+
+/datum/book_entry/vis
+	name = "Vis!"
+	category = "Circuitus"
+
+/datum/book_entry/vis/inner_book_html(mob/user)
+	return {"
+	<div>
+	<h2>Vis!</h2>
+	REQUIRES KNOWLEDGE OF GIANT'S STRENGTH TO USE.
+	<BR>
+	<BR>
+	This spell command receives (optionally) a number and an iota of a creature. The creature's strength will be enhanced by number given, to a limit of 3.
+	Lasts for 20 seconds.
+	</div>
+	"}
+
+/datum/book_entry/saxum
+	name = "Saxum!"
+	category = "Circuitus"
+
+/datum/book_entry/saxum/inner_book_html(mob/user)
+	return {"
+	<div>
+	<h2>Saxum!</h2>
+	REQUIRES KNOWLEDGE OF STONESKIN TO USE.
+	<BR>
+	<BR>
+	This spell command receives (optionally) a number and an iota of a creature. The creature's constitution will be enhanced by number given, to a limit of 3.
+	Lasts for 20 seconds.
+	</div>
+	"}
+
+/datum/book_entry/festinatio
+	name = "Festinatio!"
+	category = "Circuitus"
+
+/datum/book_entry/festinatio/inner_book_html(mob/user)
+	return {"
+	<div>
+	<h2>Festinatio!</h2>
+	REQUIRES KNOWLEDGE OF HASTE TO USE.
+	<BR>
+	<BR>
+	This spell command receives (optionally) a number and an iota of a creature. The creature's speed will be enhanced by number given, to a limit of 3.
+	Lasts for 20 seconds.
+	</div>
+	"}
+
+/datum/book_entry/oculi
+	name = "Oculi!"
+	category = "Circuitus"
+
+/datum/book_entry/oculi/inner_book_html(mob/user)
+	return {"
+	<div>
+	<h2>Oculi!</h2>
+	REQUIRES KNOWLEDGE OF HAWK'S EYE TO USE.
+	<BR>
+	<BR>
+	This spell command receives (optionally) a number and an iota of a creature. The creature's perception will be enhanced by number given, to a limit of 3.
+	Lasts for 20 seconds.
+	</div>
+	"}
+
+/datum/book_entry/tenax
+	name = "Tenax!"
+	category = "Circuitus"
+
+/datum/book_entry/tenax/inner_book_html(mob/user)
+	return {"
+	<div>
+	<h2>Tenax!</h2>
+	REQUIRES KNOWLEDGE OF FORTITUDE TO USE.
+	<BR>
+	<BR>
+	This spell command receives (optionally) a number and an iota of a creature. The creature's endurance will be enhanced by number given, to a limit of 3.
+	Lasts for 20 seconds.
+	</div>
+	"}
