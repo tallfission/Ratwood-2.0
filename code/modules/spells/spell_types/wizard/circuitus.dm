@@ -938,7 +938,7 @@
 
 /datum/spell_command
 	var/word = ""
-	var/fatiguecost = 30
+	var/fatiguecost = 20
 	var/obj/effect/proc_holder/spell/needs_spell = null
 
 /datum/spell_command/proc/activate(datum/incantation_data/data)
@@ -953,7 +953,7 @@
 
 /datum/spell_command/flames
 	word = "ignis"
-	fatiguecost = 30
+	fatiguecost = 25
 	needs_spell = /obj/effect/proc_holder/spell/invoked/projectile/fireball
 
 /datum/spell_command/flames/do_spell(datum/incantation_data/data)
@@ -1009,7 +1009,7 @@
 
 /datum/spell_command/lightning
 	word = "fulmen"
-	fatiguecost = 30
+	fatiguecost = 20
 	needs_spell = /obj/effect/proc_holder/spell/invoked/thunderstrike
 
 /datum/spell_command/lightning/do_spell(datum/incantation_data/data)
@@ -1178,7 +1178,7 @@
 
 /datum/spell_command/fix_item
 	word = "reficio"
-	fatiguecost = 15
+	fatiguecost = 10
 	needs_spell = /obj/effect/proc_holder/spell/invoked/mending
 
 /datum/spell_command/fix_item/do_spell(datum/incantation_data/data)
@@ -1227,7 +1227,7 @@
 
 /datum/spell_command/push_away
 	word = "obmolior"
-	fatiguecost = 30
+	fatiguecost = 10
 	needs_spell = /obj/effect/proc_holder/spell/invoked/repulse
 
 /datum/spell_command/push_away/do_spell(datum/incantation_data/data)
@@ -1282,7 +1282,7 @@
 
 /datum/spell_command/pull_close
 	word = "recolligere"
-	fatiguecost = 30
+	fatiguecost = 10
 	needs_spell = /obj/effect/proc_holder/spell/invoked/projectile/fetch
 
 /datum/spell_command/pull_close/do_spell(datum/incantation_data/data)
@@ -1337,7 +1337,7 @@
 
 /datum/spell_command/make_wall
 	word = "murus"
-	fatiguecost = 20
+	fatiguecost = 10
 	needs_spell = /obj/effect/proc_holder/spell/invoked/forcewall
 
 /datum/spell_command/make_wall/do_spell(datum/incantation_data/data)
