@@ -76293,10 +76293,6 @@
 /obj/item/rogueweapon/pick,
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/cavewet)
-"xfA" = (
-/obj/structure/bars/cemetery,
-/turf/open/floor/rogue/cobble/mossy,
-/area/rogue/outdoors/woodsrat/north)
 "xfF" = (
 /obj/structure/closet/crate/chest{
 	lockid = "clinic"
@@ -77401,11 +77397,9 @@
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/mountains)
 "xxM" = (
-/obj/structure/roguewindow/stained/zizo,
-/turf/closed/wall/mineral/rogue/stone/window/moss{
-	icon_state = "stonewindow"
-	},
-/area/rogue/indoors/town/church/chapel)
+/obj/structure/bars/cemetery,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/woodsrat/north)
 "xxR" = (
 /obj/structure/chair/bench/couchablack{
 	pixel_y = 2
@@ -206022,8 +206016,8 @@ qbW
 qCt
 iJc
 nhG
-iPe
-iPe
+aml
+aml
 cMI
 iJc
 iJc
@@ -206454,7 +206448,7 @@ qCt
 iJc
 iJc
 nhG
-iPe
+aml
 lVD
 lVD
 iJc
@@ -206890,7 +206884,7 @@ iJc
 lVD
 iJc
 iJc
-iPe
+aml
 iJc
 nhG
 nhG
@@ -207318,7 +207312,7 @@ iJc
 iJc
 iJc
 iJc
-iPe
+aml
 iJc
 iJc
 iJc
@@ -208183,7 +208177,7 @@ wwX
 wwX
 iJc
 iJc
-iPe
+aml
 iJc
 iJc
 nhG
@@ -250104,7 +250098,7 @@ wLx
 wLx
 amU
 amU
-xxM
+uDQ
 myX
 rvI
 gKd
@@ -253128,7 +253122,7 @@ amU
 amU
 amU
 amU
-xxM
+uDQ
 vHi
 vHi
 vHi
@@ -301577,10 +301571,10 @@ fwo
 fwo
 fwo
 kFG
-rkn
+kFG
 ctr
 ctr
-rkn
+kFG
 kFG
 kFG
 kFG
@@ -303317,7 +303311,7 @@ fwo
 fwo
 kFG
 kFG
-rkn
+kFG
 kFG
 kFG
 kFG
@@ -303753,7 +303747,7 @@ eje
 wfN
 kBq
 kFG
-rkn
+kFG
 kFG
 hnb
 biF
@@ -306771,7 +306765,7 @@ gfO
 oIO
 oZP
 ctr
-rkn
+kFG
 tpJ
 qOk
 pjM
@@ -313670,10 +313664,10 @@ fwo
 ctr
 ctr
 ctr
-rkn
 kFG
-rkn
-rkn
+kFG
+kFG
+kFG
 kFG
 ssR
 kFG
@@ -320466,7 +320460,7 @@ dQm
 dQm
 mFo
 wyl
-cty
+nwO
 htn
 dQm
 dQm
@@ -320898,8 +320892,8 @@ yhB
 dQm
 cty
 dQm
-cty
-dQm
+nwO
+wrI
 dQm
 wZx
 kKp
@@ -370109,12 +370103,12 @@ rrT
 rrT
 rrT
 cjH
-xfA
+xxM
 bef
 bef
 bef
 bef
-xfA
+xxM
 cjH
 cjH
 cjH
@@ -370541,12 +370535,12 @@ cjH
 lkU
 lkU
 cjH
-xfA
+xxM
 bef
 bef
 bef
 bef
-xfA
+xxM
 cjH
 cjH
 rrT
@@ -611412,7 +611406,7 @@ edX
 fJy
 cpn
 ihx
-cpn
+vST
 oFl
 moU
 moU
