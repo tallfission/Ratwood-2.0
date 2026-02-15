@@ -12,13 +12,13 @@
 /datum/mapGeneratorModule/forestratnospawngrass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/rogue/grass)
-	spawnableTurfs = list(/turf/open/floor/rogue/grass/nospawn = 40)
+	spawnableTurfs = list(/turf/open/floor/rogue/grass/nospawn = 60)
 	allowed_areas = list(/area/rogue/outdoors/woodsrat)
 
 /datum/mapGeneratorModule/forestratnospawndirt
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/rogue/dirt)
-	spawnableTurfs = list(/turf/open/floor/rogue/dirt/nospawn = 40)
+	spawnableTurfs = list(/turf/open/floor/rogue/dirt/nospawn = 60)
 	allowed_areas = list(/area/rogue/outdoors/woodsrat)
 
 /datum/mapGeneratorModule/forestrat
