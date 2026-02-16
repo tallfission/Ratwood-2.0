@@ -56622,6 +56622,7 @@
 /area/rogue/indoors/town/manor/rockhill)
 "rsv" = (
 /obj/machinery/light/rogue/hearth,
+/obj/item/rogueweapon/surgery/cautery/branding/slave,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
 "rsy" = (
