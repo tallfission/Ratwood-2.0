@@ -13,8 +13,8 @@
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_WIL = 2,
-		STATKEY_SPD = 2,
-		STATKEY_CON = 2,	//-LCK +CON
+		STATKEY_SPD = 1,
+		STATKEY_CON = 1,
 	)
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
@@ -79,3 +79,10 @@
 				beltr = /obj/item/rogueweapon/sword/falx
 				beltl = /obj/item/rogueweapon/scabbard/sword
 				head = /obj/item/clothing/head/roguetown/helmet/skullcap
+
+/datum/outfit/job/roguetown/bandit/knave/post_equip(mob/living/carbon/human/H)
+	. = ..()
+	for(var/datum/bounty/b in GLOB.head_bounties)
+		if(b.target == H.real_name || b.target_hidden == H.real_name)
+			H.change_stat(STATKEY_SPD, 1)
+			H.change_stat(STATKEY_CON, 1)
