@@ -24,23 +24,13 @@
 
 /datum/supply_pack/rogue/Sawbones/icoif
 	name = "Iron Coif"
-	cost = 20
+	cost = 10
 	contains = list(/obj/item/clothing/neck/roguetown/chaincoif/iron)
-
-/datum/supply_pack/rogue/Sawbones/coif/steel
-	name = "Steel Coif"
-	cost = 40
-	contains = list(/obj/item/clothing/neck/roguetown/chaincoif)
 
 /datum/supply_pack/rogue/Sawbones/gorget
 	name = "Gorget"
 	cost = 20
 	contains = list(/obj/item/clothing/neck/roguetown/gorget)
-
-/datum/supply_pack/rogue/Sawbones/sgorget
-	name = "Steel Gorget"
-	cost = 40
-	contains = list(/obj/item/clothing/neck/roguetown/gorget/steel)
 
 ///////////
 // CHEST //
@@ -141,6 +131,7 @@
 	name = "Bottle bomb"
 	cost = 20
 	contains = list(/obj/item/bomb)
+
 
 /datum/supply_pack/rogue/Sawbones/surgery_bag
 	name = "Surgery Bag"

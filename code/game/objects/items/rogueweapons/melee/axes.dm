@@ -241,7 +241,7 @@
 	smeltresult = /obj/item/ingot/copper
 
 /obj/item/rogueweapon/stoneaxe/handaxe
-	force = 18
+	force = 19
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop, /datum/intent/sword/peel)
 	name = "hatchet"
 	desc = "An iron hand axe."
@@ -251,10 +251,6 @@
 	smeltresult = /obj/item/ingot/iron
 	gripped_intents = null
 	wdefense = 2
-	wlength = WLENGTH_SHORT
-	w_class = WEIGHT_CLASS_NORMAL
-	grid_width = 32
-	grid_height = 96
 
 /obj/item/rogueweapon/stoneaxe/woodcut/bronze
 	name = "bronze axe"
