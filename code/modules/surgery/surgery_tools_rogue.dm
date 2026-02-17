@@ -208,7 +208,7 @@
 		if(heated)
 			to_chat(user, span_warning("It is too hot to change the symbols!"))
 			return
-		var/inputty = stripped_input(user, "What would you like to set the brand?\nExample: a small drawing of a rous head", "Enter branding description", null, 36)
+		var/inputty = stripped_input(user, "What would you like to set the brand?\nExample: a small drawing of a rous head", "Enter branding description", null, 42)
 		if(inputty)
 			setbranding = inputty
 			to_chat(user, span_warning("I swap the iron tip so it will imprint [setbranding]."))
