@@ -21,12 +21,14 @@ This is incredibly expensive to run. Old Dragonscale levels of expensive.
 It's also VERY loud, as in most of the map is going to hear it firing if in range.
 This will also KILL people. At least, some of the projectiles.
 Requirement of the fusilier trait for aiming and gathering coordinates should limit the intensity, combined with absurd costs.
+
+Also this is later going to the siege mode. But for now, brigands. Woohoo!!!!
 */
 /obj/structure/bombard
 	name = "portable bombard"
 	desc = "A light, portable bombard. Looks as if only a trained hand can aim it..."
 	icon = 'icons/roguetown/weapons/stationary/bombard.dmi'
-	icon_state = "temp_bombard"
+	icon_state = "smallmortar"
 	anchored = 1
 	density = 1
 	var/xinput = 0
@@ -44,6 +46,20 @@ Requirement of the fusilier trait for aiming and gathering coordinates should li
 	var/powder = FALSE
 	var/rammed = FALSE
 	var/heavy = FALSE//Can this fire anywhere, as opposed to exclusively within 124 tiles?
+
+//TODO change bombard fluff and desc - I never did this. Whoops!!! - Carl
+/obj/structure/bombard/fixed
+	name = "heavy bombard"
+	desc = "A massive, stationary bombard. Unlike a portable bombard, this one is capable of firing practically anywhere. With enough smokepowder and a dream..."
+	icon = 'icons/roguetown/weapons/stationary/bombard48.dmi'
+	icon_state = "bigmortar"//We'll get a bigger projectile set, for this one, later. That's what the heavy var was for, before.
+	fixed = 1
+	heavy = TRUE
+
+/*
+/obj/structure/bombard/OnCrafted(dirin)
+	dir = turn(dirin, 180)
+*/
 
 /obj/structure/bombard/Initialize()
 	. = ..()
@@ -221,7 +237,7 @@ Requirement of the fusilier trait for aiming and gathering coordinates should li
 		to_chat(user, "<span class='danger'>[src] is not filled with smokepowder!</span>")
 		return
 
-	if(istype(O, /obj/item/bombard_sponge))
+	if(istype(O, /obj/item/rogueweapon/woodstaff/quarterstaff/bombard_sponge))
 		if(rammed)
 			user.visible_message("<span class='notice'>The [src] is already packed properly with smokepowder!</span>")
 			return
@@ -329,37 +345,9 @@ Requirement of the fusilier trait for aiming and gathering coordinates should li
 		user.visible_message("<span class='notice'>[user] tears down [src].",
 		"<span class='notice'>You tear down [src].")
 		playsound(loc, 'sound/combat/shieldraise.ogg', 25, TRUE)
-		new /obj/item/bombard_kit(loc)
+		new /obj/item/bombard_frame(loc)
+		new /obj/item/bombard_barrel(loc)
 		qdel(src)
 
 /obj/structure/bombard/ex_act(severity)
 	return
-
-//TODO change bombard fluff and desc - I never did this. Whoops!!! - Carl
-/obj/structure/bombard/fixed
-	name = "heavy bombard"
-	desc = "A massive, stationary bombard. Unlike a portable bombard, this one is capable of firing practically anywhere. With enough smokepowder and a dream..."
-	fixed = 1
-	heavy = TRUE
-
-//The portable bombard
-/obj/item/bombard_kit
-	name = "\improper packed up bombard"
-	desc = "A packed up bombard. You should probably unpack this, as it's useless in this state."
-	icon = 'icons/roguetown/weapons/stationary/bombard.dmi'
-	icon_state = "temp_bombard_primary"
-	w_class = WEIGHT_CLASS_BULKY
-	force = 5
-	possible_item_intents = list(INTENT_GENERIC)
-
-/obj/item/bombard_kit/attack_self(mob/user)
-	user.visible_message("<span class='notice'>[user] starts deploying [src].",
-	"<span class='notice'>You start deploying [src].")
-	playsound(loc, 'sound/combat/shieldraise.ogg', 25, TRUE)
-	if(do_after(user, 4 SECONDS, src))
-		user.visible_message("<span class='notice'>[user] deploys [src].",
-		"<span class='notice'>You deploy [src].")
-		playsound(loc, 'sound/combat/shieldraise.ogg', 25, TRUE)
-		var/obj/structure/bombard/M = new /obj/structure/bombard(get_turf(user))
-		M.dir = user.dir
-		qdel(src)

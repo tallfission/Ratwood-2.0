@@ -7,7 +7,7 @@ Firstly, the coordinates device. Eventually, I'll add free aim. But for now...
 	That is, of course, to say that this is able to detect leyline intersection points. Or LIPs, for short. \
 	An incredibly expensive device, likely pried from one of the Queen's own magicians."
 	icon = 'icons/roguetown/weapons/stationary/bombard.dmi'
-	icon_state = "palantir"
+	icon_state = "compass"
 	slot_flags = ITEM_SLOT_BELT
 	w_class = WEIGHT_CLASS_SMALL
 	force = 5
@@ -30,7 +30,7 @@ Firstly, the coordinates device. Eventually, I'll add free aim. But for now...
 		to_chat(user, "<span class='warning'>This device is beyond your understanding...</span>")
 		return
 	to_chat(user, "Calculating leyline intersection point. Stand still.")
-	loud_message("A palantir's loud whine can be heard, gathering LIP data", hearing_distance = 24)//"ZEZUZ PYST FROM WHERE?!!"
+	loud_message("A palantir's loud whine can be heard", hearing_distance = 24)//"ZEZUZ PYST FROM WHERE?!!"
 	if(do_after(user, 12 SECONDS, src))
 		A = get_turf(A)
 		last_x = obfuscate_x(A.x)
@@ -43,85 +43,52 @@ Firstly, the coordinates device. Eventually, I'll add free aim. But for now...
 	else
 		to_chat(user, "<span class='warning'>You must remain still!</span>")
 
-/obj/item/bombard_sponge
+//This is a weapon because it makes me chuckle. Sorry.
+/obj/item/rogueweapon/woodstaff/quarterstaff/bombard_sponge
 	name = "powder ram"
-	desc = "A bulky, heavy rod with a sponge at one end."
+	desc = "A bulky, heavy rod with a sponge at one end, and a fool at the other. Wholly unsuited for combat."
+	icon = 'icons/roguetown/weapons/stationary/bombard64.dmi'
+	icon_state = "ramrod"
+	item_state = "ramrod"
+	w_class = WEIGHT_CLASS_BULKY
+	force = 5
+	force_wielded = 10
+	max_integrity = 25
+	wdefense = 2
+	wdefense_wbonus = 2
+	possible_item_intents = list(INTENT_GENERIC)
+
+//The portable bombard's frame, lacking a barrel.
+/obj/item/bombard_frame
+	name = "\improper light bombard frame"
+	desc = "A light bombard's frame. If you'd the barrel, you could set up a light bombard... <br>\
+	<small>To do so, you must have both pieces and 'craft' it.</small>"
 	icon = 'icons/roguetown/weapons/stationary/bombard.dmi'
-	icon_state = "bombard_sponge"
-	item_state = "bombard_sponge"
-	slot_flags = SLOT_BELT_L | SLOT_BELT_R | ITEM_SLOT_HIP
+	icon_state = "kit_frame"
 	w_class = WEIGHT_CLASS_BULKY
 	force = 5
 	possible_item_intents = list(INTENT_GENERIC)
 
-/*
-Cannonballs below.
-Take a guess, yeah?
-*/
-//This is a 'solid shot'. Does nothing, as of now.
-/obj/item/cannonball
-	name = "\improper cannonball (SOL)"
-	desc = "A hefty cannonball. Looks fairly solid."
+//And the barrel it lacks.
+/obj/item/bombard_barrel
+	name = "\improper light bombard barrel"
+	desc = "A light bombard's barrel. If you'd the frame, you could set up a light bombard... <br>\
+	<small>To do so, you must have both pieces and 'craft' it.</small>"
 	icon = 'icons/roguetown/weapons/stationary/bombard.dmi'
-	icon_state = "cball"
+	icon_state = "kit_barrel"
+	w_class = WEIGHT_CLASS_BULKY
+	force = 5
+	possible_item_intents = list(INTENT_GENERIC)
 
-/obj/item/cannonball/proc/detonate(turf/T)
-	loud_message("An explosion echos in the ears of those whom hear it", hearing_distance = 32)
-	forceMove(T)
-
-//HE
-/obj/item/cannonball/explosive
-	name = "\improper cannonball (HE)"
-	desc = "A hefty cannonball. It's hot to the touch, as if it'll explode just by dropping it."
-	icon_state = "cball"
-
-/obj/item/cannonball/explosive/detonate(turf/T)
-	..()
-	explosion(T, 2, 4, 6, 8)
-
-//SMOKE
-/obj/item/cannonball/smoke
-	name = "\improper cannonball (SMK)"
-	desc = "A hefty cannonball. This one feels as if it's hollow."
-	icon_state = "cball_smk"
-
-/obj/item/cannonball/smoke/detonate(turf/T)
-	..()
-	var/datum/effect_system/smoke_spread/smoke = new
-	smoke.set_up(4, T, 0)
-	smoke.start()
-	explosion(T, 0, 0, 0, 3)
-
-//CANISTER
-/obj/item/cannonball/canister
-	name = "\improper cannonball (FLK)"
-	desc = "A canister shell, meant to be fired out of a bombard. Nasty thing, outlawed in all reasonable realms of the land..."
-	icon_state = "cball_smk"
-
-/obj/item/cannonball/canister/detonate(turf/T)
-	..()
-	canister_detonate()
-	spawn(2 SECONDS)//It detonates ABOVE, or something. I 'unno. It's COOL.
-	explosion(T, 0, 0, 1, 4)
-
-/*
-The canister effect, when using canister shot or adjacent stuff.
-*/
-/obj/item/cannonball/proc/canister_detonate(atom/target)
-	var/datum/component/shrapnel/canister_shrapnel = new /datum/component/shrapnel()
-	target = get_turf(src)
-	canister_shrapnel.projectile_type = /obj/projectile/canister_shrap
-	canister_shrapnel.radius = 12
-	canister_shrapnel.do_shrapnel(src, target)
-
-/obj/projectile/canister_shrap
-	name = "\improper canister shrapnel"
-	icon_state = "bullet"
-	damage = 5//Very many of them, but very low damage and AP.
-	range = 12//We want this to go beyond screen, in case of far misses.\improper
-	pass_flags = PASSTABLE | PASSGRILLE
-	armor_penetration = 20
-	damage_type = BRUTE
-	woundclass = BCLASS_PICK
-	flag = "piercing"
-	speed = 2
+//And the recipe in which we hold it hostage. It shouldn't be survival, but, whatever.
+/datum/crafting_recipe/roguetown/survival/bombard
+	name = "Portable Bombard (Barrel and Frame)"
+	result = /obj/structure/bombard
+	category = "Ranged"
+	reqs = list(
+		/obj/item/bombard_frame = 1,
+		/obj/item/bombard_barrel = 1
+		)
+	skillcraft = /datum/skill/combat/firearms
+	craftdiff = 1
+	time = 60
