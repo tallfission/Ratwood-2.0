@@ -60,7 +60,7 @@ There are several things that need to be remembered:
 //HAIR OVERLAY
 /mob/living/carbon/human/update_hair()
 	rebuild_obscured_flags()
-	queue_icon_update(PENDING_UPDATE_BODY)
+	update_body_parts(TRUE)
 	return
 
 /mob/living/carbon/human/update_body()
@@ -1144,12 +1144,12 @@ There are several things that need to be remembered:
 			if(dna.species.custom_clothes)
 				racecustom = dna.species.clothes_id
 			if(gender == FEMALE && !dna.species.use_m)
-				cloak_overlay = cloak.build_worn_icon(default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', female = TRUE, customi = racecustom, boobed_overlay = has_boobed_overlay(), clip_mask = c_mask)
+				cloak_overlay = cloak.build_worn_icon(default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', female = TRUE, customi = racecustom, sleeveindex = 4, boobed_overlay = has_boobed_overlay(), clip_mask = c_mask)
 			else
 				if(dna.species.use_f)
-					cloak_overlay = cloak.build_worn_icon(default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', female = TRUE, customi = racecustom, boobed_overlay = has_boobed_overlay(), clip_mask = c_mask)
+					cloak_overlay = cloak.build_worn_icon(default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', female = TRUE, customi = racecustom, sleeveindex = 4, boobed_overlay = has_boobed_overlay(), clip_mask = c_mask)
 				else
-					cloak_overlay = cloak.build_worn_icon(default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', female = FALSE, customi = racecustom, clip_mask = c_mask)
+					cloak_overlay = cloak.build_worn_icon(default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', female = FALSE, customi = racecustom, sleeveindex = 4, clip_mask = c_mask)
 
 			if(gender == MALE)
 				if(OFFSET_CLOAK in dna.species.offset_features)
@@ -1981,7 +1981,7 @@ generate/load female uniform sprites matching all previously decided variables
 	if (!istype(HD))
 		return
 
-	testing("ehadonly [src]")
+
 	HD.update_limb()
 
 	add_overlay(HD.get_limb_icon())
