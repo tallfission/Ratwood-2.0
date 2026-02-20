@@ -809,9 +809,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 			for(var/entry in SSstatpanel.mc_cache)
 				var/datum/controller/subsystem/SSsub = entry["subsystem"]
 				stat(entry["title"], SSsub.statclick.update(entry["msg"]))
-				
-		if(statpanel("Tickets"))
-			GLOB.ahelp_tickets.stat_entry()
 
 		if(length(GLOB.sdql2_queries))
 			if(statpanel("SDQL2"))
