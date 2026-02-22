@@ -117,6 +117,12 @@
 	cost = 20
 	contains = list(/obj/item/rogueweapon/tongs)
 
+/datum/supply_pack/rogue/Pioneer/chiselset
+
+	name = "Chisel and Hammer"
+	cost = 20
+	contains = list(/obj/item/rogueweapon/chisel/assembly/hammer)
+
 /datum/supply_pack/rogue/Pioneer/cogs
 	name = "Cogs"
 	cost = 20
