@@ -123,6 +123,16 @@
 	cost = 20
 	contains = list(/obj/item/rogueweapon/chisel/assembly/hammer)
 
+/datum/supply_pack/rogue/Pioneer/handsaw
+	name = "Handsaw"
+	cost = 20
+	contains = list(/obj/item/rogueweapon/handsaw)
+
+/datum/supply_pack/rogue/Pioneer/linker
+	name = "Artificer's Wrench"
+	cost = 20
+	contains = list(/obj/item/contraption/linker)
+
 /datum/supply_pack/rogue/Pioneer/cogs
 	name = "Cogs"
 	cost = 20
